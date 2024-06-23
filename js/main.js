@@ -1,6 +1,4 @@
-/* eslint no-console: 0 */
-
-import { getConsoleGroupMessage, testResult } from './utils.js';
+import { testCases } from './utils.js';
 
 const COMMENTS_NUMBER = 30;
 const PHOTOS_NUMBER = 25;
@@ -70,6 +68,7 @@ const createRandomIdFromRangeGenerator = (min, max) => {
     let currentValue = getRandomInteger(min, max);
 
     if (previousValues.length >= (max - min + 1)) {
+      // eslint-disable-next-line no-console
       console.error(`Перебраны все числа из диапазона от ${min} до ${max}`);
       return null;
     }
@@ -120,16 +119,37 @@ for (const photo of photos) {
   }
 }
 
-const checkForDuplicates = (array) => (array.length !== new Set(array).size);
+const checkForDuplicates = (array) => array.length !== new Set(array).size;
 
-console.group(...getConsoleGroupMessage('Photo ids have duplicates'));
-testResult(checkForDuplicates(photoIds), false);
-console.groupEnd();
+testCases({
+  message: 'Photo ids have duplicates',
+  cb: checkForDuplicates,
+  cases: [
+    {
+      values: [photoUrls],
+      expectedResult: false
+    }
+  ]
+});
 
-console.group(...getConsoleGroupMessage('Photo urls have duplicates'));
-testResult(checkForDuplicates(photoUrls), false);
-console.groupEnd();
+testCases({
+  message: 'Photo urls have duplicates',
+  cb: checkForDuplicates,
+  cases: [
+    {
+      values: [photoIds],
+      expectedResult: false
+    }
+  ]
+});
 
-console.group(...getConsoleGroupMessage('Comment ids have duplicates'));
-testResult(checkForDuplicates(commentIds), false);
-console.groupEnd();
+testCases({
+  message: 'Comment ids have duplicates',
+  cb: checkForDuplicates,
+  cases: [
+    {
+      values: [commentIds],
+      expectedResult: false
+    }
+  ]
+});

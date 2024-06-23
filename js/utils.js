@@ -7,13 +7,13 @@ const getConsoleGroupMessage = (groupName) => [
   'color: cornflowerblue;',
 ];
 
-const testResult = (returnedValue, expectedValue) => {
+const testResult = (testValue, expectedResult) => {
   const SUCCESS_COLOR = 'color: #bada55';
   const ERROR_COLOR = 'color: #dc143c';
 
   const isEqual =
-    returnedValue === expectedValue ||
-    (Number.isNaN(returnedValue) && Number.isNaN(expectedValue));
+    testValue === expectedResult ||
+    (Number.isNaN(testValue) && Number.isNaN(expectedResult));
 
   const testMessage = `%cTest ${
     isEqual ? 'passed' : 'failed'
@@ -21,14 +21,17 @@ const testResult = (returnedValue, expectedValue) => {
   const textColor = isEqual ? SUCCESS_COLOR : ERROR_COLOR;
 
   console.log(
-    `${testMessage}\nExpecting - %c${expectedValue}${RESET_CSS_ATTRIBUTE}, getting - %c${returnedValue}`,
+    `${testMessage}\nExpecting - %c${expectedResult}${RESET_CSS_ATTRIBUTE}, getting - %c${testValue}`,
     `background: #222; ${textColor}; padding: 3px;`,
     SUCCESS_COLOR,
     textColor
   );
 };
 
-export {
-  getConsoleGroupMessage,
-  testResult,
+export const testCases = ({ message, cb, cases }) => {
+  console.group(...getConsoleGroupMessage(message || cb.name));
+  cases.forEach(({ values, expectedResult }) => {
+    testResult(Array.isArray(values) ? cb(...values) : cb(values), expectedResult);
+  });
+  console.groupEnd();
 };
