@@ -35,3 +35,5 @@ export const testCases = ({ message, cb, cases }) => {
   });
   console.groupEnd();
 };
+
+export const showError = (message) => console.error(message);
