@@ -31,7 +31,7 @@ const testResult = (testValue, expectedResult) => {
 export const testCases = ({ message, cb, cases }) => {
   console.group(...getConsoleGroupMessage(message || cb.name));
   cases.forEach(({ values, expectedResult }) => {
-    testResult(Array.isArray(values) ? cb(...values) : cb(values), expectedResult);
+    testResult(cb(...values), expectedResult);
   });
   console.groupEnd();
 };
