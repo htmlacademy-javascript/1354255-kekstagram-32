@@ -99,7 +99,7 @@ const createPhoto = () => {
   return {
     id,
     url: `photos/${id}.jpg`,
-    description: PHOTO_DESCRIPTIONS[id - 1],
+    description: PHOTO_DESCRIPTIONS[id - 1] ?? '',
     likes: getRandomInteger(15, 200),
     comments: Array.from({ length: getRandomInteger(0, COMMENTS_NUMBER) }, createComment),
   };
