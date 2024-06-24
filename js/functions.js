@@ -1,32 +1,4 @@
-/* eslint no-console: 0 */
-
-const RESET_CSS_ATTRIBUTE = '\x1B[m';
-
-const getConsoleGroupMessage = (groupName) => [
-  `%c ${groupName}${RESET_CSS_ATTRIBUTE} tests`,
-  'color: cornflowerblue;',
-];
-
-const testResult = (returnedValue, expectedValue) => {
-  const SUCCESS_COLOR = 'color: #bada55';
-  const ERROR_COLOR = 'color: #dc143c';
-
-  const isEqual =
-    returnedValue === expectedValue ||
-    (Number.isNaN(returnedValue) && Number.isNaN(expectedValue));
-
-  const testMessage = `%cTest ${
-    isEqual ? 'passed' : 'failed'
-  }${RESET_CSS_ATTRIBUTE}`;
-  const textColor = isEqual ? SUCCESS_COLOR : ERROR_COLOR;
-
-  console.log(
-    `${testMessage}\nExpecting - %c${expectedValue}${RESET_CSS_ATTRIBUTE}, getting - %c${returnedValue}`,
-    `background: #222; ${textColor}; padding: 3px;`,
-    SUCCESS_COLOR,
-    textColor
-  );
-};
+import { testCases } from './utils.js';
 
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
@@ -40,26 +12,76 @@ const isPalindrome = (string) => {
 const extractNumbers = (stringOrNumber) =>
   parseInt(stringOrNumber.toString().replaceAll(/[^\d]/g, ''), 10);
 
-console.group(...getConsoleGroupMessage('checkStringLength'));
-testResult(checkStringLength('проверяемая строка', 20), true);
-testResult(checkStringLength('проверяемая строка', 18), true);
-testResult(checkStringLength('проверяемая строка', 10), false);
-console.groupEnd();
+// tests
+const checkStringLengthCases = [
+  {
+    values: ['проверяемая строка', 20],
+    expectedResult: true
+  },
+  {
+    values: ['проверяемая строка', 18],
+    expectedResult: true
+  },
+  {
+    values: ['проверяемая строка', 10],
+    expectedResult: false
+  },
+];
 
-console.group(...getConsoleGroupMessage('isPalindrome'));
-testResult(isPalindrome('топот'), true);
-testResult(isPalindrome('ДовОд'), true);
-testResult(isPalindrome('Кекс'), false);
-testResult(isPalindrome('Лёша на полке клопа нашёл '), true);
-console.groupEnd();
+const isPalindromeCases = [
+  {
+    values: ['топот'],
+    expectedResult: true
+  },
+  {
+    values: ['ДовОд'],
+    expectedResult: true
+  },
+  {
+    values: ['Кекс'],
+    expectedResult: false
+  },
+  {
+    values: ['Лёша на полке клопа нашёл '],
+    expectedResult: true
+  },
+];
 
-console.group(...getConsoleGroupMessage('extractNumbers'));
-testResult(extractNumbers('2023 год'), 2023);
-testResult(extractNumbers('ECMAScript 2022'), 2022);
-testResult(extractNumbers('1 кефир, 0.5 батона'), 105);
-testResult(extractNumbers('агент 007'), 7);
-testResult(extractNumbers(2023), 2023);
-testResult(extractNumbers(-1), 1);
-testResult(extractNumbers(1.5), 15);
-testResult(extractNumbers('а я томат'), NaN);
-console.groupEnd();
+const extractNumbersCases = [
+  {
+    values: ['2023 год'],
+    expectedResult: 2023
+  },
+  {
+    values: ['ECMAScript 2022'],
+    expectedResult: 2022
+  },
+  {
+    values: ['1 кефир, 0.5 батона'],
+    expectedResult: 105
+  },
+  {
+    values: ['агент 007'],
+    expectedResult: 7
+  },
+  {
+    values: [2023],
+    expectedResult: 2023
+  },
+  {
+    values: [-1],
+    expectedResult: 1
+  },
+  {
+    values: [1.5],
+    expectedResult: 15
+  },
+  {
+    values: ['а я томат'],
+    expectedResult: NaN
+  },
+];
+
+testCases({ cb: checkStringLength, cases: checkStringLengthCases });
+testCases({ cb: isPalindrome, cases: isPalindromeCases });
+testCases({ cb: extractNumbers, cases: extractNumbersCases });
