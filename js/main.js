@@ -2,6 +2,12 @@ import { testCases, showError } from './utils.js';
 
 const COMMENTS_NUMBER = 30;
 const PHOTOS_NUMBER = 25;
+const MIN_COMMENT_ID = 1;
+const MIN_PHOTO_ID = 1;
+const MIN_LIKES_NUMBER = 25;
+const MAX_LIKES_NUMBER = 200;
+const MIN_AVATAR_ID = 1;
+const MAX_AVATAR_ID = 6;
 
 const COMMENT_MESSAGES = [
   'Всё отлично!',
@@ -82,16 +88,16 @@ const createRandomIdFromRangeGenerator = (min, max) => {
   };
 };
 
-const generateCommentId = createRandomIdFromRangeGenerator(1, COMMENTS_NUMBER * PHOTOS_NUMBER);
+const generateCommentId = createRandomIdFromRangeGenerator(MIN_COMMENT_ID, COMMENTS_NUMBER * PHOTOS_NUMBER);
 
 const createComment = () => ({
   id: generateCommentId(),
-  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+  avatar: `img/avatar-${getRandomInteger(MIN_AVATAR_ID, MAX_AVATAR_ID)}.svg`,
   message: getRandomInteger(0, COMMENT_MESSAGES.length - 1),
   name: getRandomInteger(0, USER_NAMES.length - 1),
 });
 
-const generatePhotoId = createRandomIdFromRangeGenerator(1, 25);
+const generatePhotoId = createRandomIdFromRangeGenerator(MIN_PHOTO_ID, PHOTOS_NUMBER);
 
 const createPhoto = () => {
   const id = generatePhotoId();
@@ -100,7 +106,7 @@ const createPhoto = () => {
     id,
     url: `photos/${id}.jpg`,
     description: PHOTO_DESCRIPTIONS[id - 1] ?? '',
-    likes: getRandomInteger(15, 200),
+    likes: getRandomInteger(MIN_LIKES_NUMBER, MAX_LIKES_NUMBER),
     comments: Array.from({ length: getRandomInteger(0, COMMENTS_NUMBER) }, createComment),
   };
 };
