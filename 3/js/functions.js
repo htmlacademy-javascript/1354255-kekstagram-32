@@ -30,54 +30,54 @@ const checkStringLengthCases = [
 
 const isPalindromeCases = [
   {
-    values: 'топот',
+    values: ['топот'],
     expectedResult: true
   },
   {
-    values: 'ДовОд',
+    values: ['ДовОд'],
     expectedResult: true
   },
   {
-    values: 'Кекс',
+    values: ['Кекс'],
     expectedResult: false
   },
   {
-    values: 'Лёша на полке клопа нашёл ',
+    values: ['Лёша на полке клопа нашёл '],
     expectedResult: true
   },
 ];
 
 const extractNumbersCases = [
   {
-    values: '2023 год',
+    values: ['2023 год'],
     expectedResult: 2023
   },
   {
-    values: 'ECMAScript 2022',
+    values: ['ECMAScript 2022'],
     expectedResult: 2022
   },
   {
-    values: '1 кефир, 0.5 батона',
+    values: ['1 кефир, 0.5 батона'],
     expectedResult: 105
   },
   {
-    values: 'агент 007',
+    values: ['агент 007'],
     expectedResult: 7
   },
   {
-    values: 2023,
+    values: [2023],
     expectedResult: 2023
   },
   {
-    values: -1,
+    values: [-1],
     expectedResult: 1
   },
   {
-    values: 1.5,
+    values: [1.5],
     expectedResult: 15
   },
   {
-    values: 'а я томат',
+    values: ['а я томат'],
     expectedResult: NaN
   },
 ];
