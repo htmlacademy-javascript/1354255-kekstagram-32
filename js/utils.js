@@ -36,4 +36,31 @@ export const testCases = ({ message, cb, cases }) => {
   console.groupEnd();
 };
 
-export const showError = (message) => console.error(message);
+export const getRandomInteger = (a, b) => {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  const result = Math.random() * (upper - lower + 1) + lower;
+
+  return Math.floor(result);
+};
+
+export const createRandomIdFromRangeGenerator = (min, max) => {
+  const previousValues = [];
+
+  return () => {
+    let currentValue = getRandomInteger(min, max);
+
+    if (previousValues.length >= (max - min + 1)) {
+      console.error(`Перебраны все числа из диапазона от ${min} до ${max}`);
+      return null;
+    }
+
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(min, max);
+    }
+
+    previousValues.push(currentValue);
+
+    return currentValue;
+  };
+};
