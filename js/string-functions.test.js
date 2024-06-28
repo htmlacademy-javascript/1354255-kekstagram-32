@@ -1,5 +1,5 @@
+import { describe, it, expect } from 'vitest';
 import { checkStringLength, isPalindrome, extractNumbers } from './string-functions.js';
-import { testCases } from './utils.js';
 
 const checkStringLengthCases = [
   {
@@ -18,58 +18,72 @@ const checkStringLengthCases = [
 
 const isPalindromeCases = [
   {
-    values: ['топот'],
+    value: 'топот',
     expectedResult: true
   },
   {
-    values: ['ДовОд'],
+    value: 'ДовОд',
     expectedResult: true
   },
   {
-    values: ['Кекс'],
+    value: 'Кекс',
     expectedResult: false
   },
   {
-    values: ['Лёша на полке клопа нашёл '],
+    value: 'Лёша на полке клопа нашёл ',
     expectedResult: true
   },
 ];
 
 const extractNumbersCases = [
   {
-    values: ['2023 год'],
+    value: '2023 год',
     expectedResult: 2023
   },
   {
-    values: ['ECMAScript 2022'],
+    value: 'ECMAScript 2022',
     expectedResult: 2022
   },
   {
-    values: ['1 кефир, 0.5 батона'],
+    value: '1 кефир, 0.5 батона',
     expectedResult: 105
   },
   {
-    values: ['агент 007'],
+    value: 'агент 007',
     expectedResult: 7
   },
   {
-    values: [2023],
+    value: 2023,
     expectedResult: 2023
   },
   {
-    values: [-1],
+    value: -1,
     expectedResult: 1
   },
   {
-    values: [1.5],
+    value: 1.5,
     expectedResult: 15
   },
   {
-    values: ['а я томат'],
+    value: 'а я томат',
     expectedResult: NaN
   },
 ];
 
-testCases({ cb: checkStringLength, cases: checkStringLengthCases });
-testCases({ cb: isPalindrome, cases: isPalindromeCases });
-testCases({ cb: extractNumbers, cases: extractNumbersCases });
+describe('checkStringLength', () => {
+  it.each(checkStringLengthCases)('returns $expectedResult for $values', ({ values, expectedResult }) => {
+    expect(checkStringLength(...values)).toBe(expectedResult);
+  });
+});
+
+describe('isPalindrome', () => {
+  it.each(isPalindromeCases)('returns $expectedResult for $value', ({ value, expectedResult }) => {
+    expect(isPalindrome(value)).toBe(expectedResult);
+  });
+});
+
+describe('extractNumbers', () => {
+  it.each(extractNumbersCases)('returns $expectedResult for $value', ({ value, expectedResult }) => {
+    expect(extractNumbers(value)).toBe(expectedResult);
+  });
+});
