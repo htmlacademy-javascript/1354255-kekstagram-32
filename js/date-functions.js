@@ -1,6 +1,8 @@
-const getMinutesFromDayStart = (time) => {
-  const MINUTES_IN_HOUR = 60;
+const MINUTES_IN_HOUR = 60;
+const SECONDS_IN_MINUTE = 60;
+const MS_IN_SECOND = 1000;
 
+const getMinutesFromDayStart = (time) => {
   const [hours, minutes] = time.split(':').map((string) => parseInt(string, 10));
   return hours * MINUTES_IN_HOUR + minutes;
 };
@@ -31,9 +33,6 @@ const getDateFromTime = (time) => {
 };
 
 export const checkMeetingFitsWorkday = (workdayStart, workdayEnd, meetingStart, meetingDuration) => {
-  const MS_IN_SECOND = 1000;
-  const SECONDS_IN_MINUTE = 60;
-
   const workdayStartTime = getDateFromTime(workdayStart);
   const workdayEndTime = getDateFromTime(workdayEnd);
   const meetingStartTime = getDateFromTime(meetingStart);
