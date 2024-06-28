@@ -1,6 +1,5 @@
+import { describe, it, expect } from 'vitest';
 import { checkMeetingFitsSchedule, checkMeetingFitsWorkday } from './date-functions.js';
-import { testCases } from './utils.js';
-
 
 const checkMeetingFitsCases = [
   {
@@ -33,5 +32,14 @@ const checkMeetingFitsCases = [
   },
 ];
 
-testCases({ cb: checkMeetingFitsSchedule, cases: checkMeetingFitsCases });
-testCases({ cb: checkMeetingFitsWorkday, cases: checkMeetingFitsCases });
+describe('checkMeetingFitsSchedule', () => {
+  it.each(checkMeetingFitsCases)('returns $expectedResult for $values', ({ values, expectedResult }) => {
+    expect(checkMeetingFitsSchedule(...values)).toBe(expectedResult);
+  });
+});
+
+describe('checkMeetingFitsWorkday', () => {
+  it.each(checkMeetingFitsCases)('returns $expectedResult for $values', ({ values, expectedResult }) => {
+    expect(checkMeetingFitsWorkday(...values)).toBe(expectedResult);
+  });
+});
