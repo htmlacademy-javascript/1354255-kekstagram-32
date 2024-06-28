@@ -1,4 +1,4 @@
-import { checkStringLength, isPalindrome, extractNumbers } from './functions.js';
+import { checkStringLength, isPalindrome, extractNumbers } from './string-functions.js';
 import { testCases } from './utils.js';
 
 const checkStringLengthCases = [
