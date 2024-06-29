@@ -32,4 +32,4 @@ const createPhoto = () => {
   };
 };
 
-export const createPhotos = () => Array.from({ length: PhotosNumber.MAX }, createPhoto);
+export const generatePhotos = () => Array.from({ length: PhotosNumber.MAX }, createPhoto);

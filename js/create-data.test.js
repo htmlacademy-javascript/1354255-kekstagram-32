@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll } from 'vitest';
-import { createPhotos } from './create-data.js';
+import { generatePhotos } from './create-data.js';
 
 expect.extend({
   toContainUnique(received) {
@@ -23,10 +23,10 @@ expect.extend({
 let photos;
 
 beforeAll(() => {
-  photos = createPhotos();
+  photos = generatePhotos();
 });
 
-describe('createPhotos', () => {
+describe('generatePhotos', () => {
   it('creates unique ids for photos', () => {
     const photoIds = photos.map((photo) => photo.id);
 
