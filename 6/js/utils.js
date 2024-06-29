@@ -27,3 +27,19 @@ export const createRandomIdFromRangeGenerator = (min, max) => {
     return currentValue;
   };
 };
+
+export const createPictureComponent = (photo, template) => {
+  const { url = '', description = '', likes = 0, comments = [] } = photo;
+
+  const pictureElement = template.cloneNode(true);
+  const imageElement = pictureElement.querySelector('.picture__img');
+  const commentsElement = pictureElement.querySelector('.picture__comments');
+  const likesElement = pictureElement.querySelector('.picture__likes');
+
+  imageElement.src = url;
+  imageElement.alt = description;
+  commentsElement.textContent = comments.length;
+  likesElement.textContent = likes;
+
+  return pictureElement;
+};
