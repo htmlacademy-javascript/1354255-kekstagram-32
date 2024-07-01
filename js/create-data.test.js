@@ -1,48 +1,53 @@
-import { createPhotos } from './create-data.js';
-import { testCases } from './utils.js';
+import { describe, it, expect, beforeAll } from 'vitest';
+import { generatePhotos } from './create-data.js';
 
-const photos = createPhotos();
-const photoIds = photos.map((photo) => photo.id);
-const photoUrls = photos.map((photo) => photo.url.match(/\d+/g)[0]);
-const commentIds = [];
+expect.extend({
+  toContainUnique(received) {
+    const hasUnique = received.length === new Set(received).size;
 
-for (const photo of photos) {
-  for (const comment of photo.comments) {
-    commentIds.push(comment.id);
+    if (hasUnique) {
+      return {
+        message: () => `expected [${received}] array is unique`,
+        pass: true,
+      };
+    }
+
+
+    return {
+      message: () => `expected [${received}] array is not to unique`,
+      pass: false,
+    };
   }
-}
-
-const checkForDuplicates = (array) => array.length !== new Set(array).size;
-
-testCases({
-  message: 'Photo ids have duplicates',
-  cb: checkForDuplicates,
-  cases: [
-    {
-      values: [photoUrls],
-      expectedResult: false
-    }
-  ]
 });
 
-testCases({
-  message: 'Photo urls have duplicates',
-  cb: checkForDuplicates,
-  cases: [
-    {
-      values: [photoIds],
-      expectedResult: false
-    }
-  ]
+let photos;
+
+beforeAll(() => {
+  photos = generatePhotos();
 });
 
-testCases({
-  message: 'Comment ids have duplicates',
-  cb: checkForDuplicates,
-  cases: [
-    {
-      values: [commentIds],
-      expectedResult: false
+describe('generatePhotos', () => {
+  it('creates unique ids for photos', () => {
+    const photoIds = photos.map((photo) => photo.id);
+
+    expect(photoIds).toContainUnique();
+  });
+
+  it('creates unique urls for photos', () => {
+    const photoUrls = photos.map((photo) => photo.url.match(/\d+/g)[0]);
+
+    expect(photoUrls).toContainUnique();
+  });
+
+  it('creates unique comments ids', () => {
+    const commentIds = [];
+
+    for (const photo of photos) {
+      for (const comment of photo.comments) {
+        commentIds.push(comment.id);
+      }
     }
-  ]
+
+    expect(commentIds).toContainUnique();
+  });
 });

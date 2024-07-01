@@ -1,11 +1,22 @@
-export const COMMENTS_NUMBER = 30;
-export const PHOTOS_NUMBER = 25;
-export const MIN_COMMENT_ID = 1;
-export const MIN_PHOTO_ID = 1;
-export const MIN_LIKES_NUMBER = 25;
-export const MAX_LIKES_NUMBER = 200;
-export const MIN_AVATAR_ID = 1;
-export const MAX_AVATAR_ID = 6;
+export const CommentsNumber = Object.freeze({
+  MIN: 1,
+  MAX: 30
+});
+
+export const PhotosNumber = Object.freeze({
+  MIN: 1,
+  MAX: 25
+});
+
+export const LikesNumber = Object.freeze({
+  MIN: 25,
+  MAX: 200
+});
+
+export const AvatarsNumber = Object.freeze({
+  MIN: 1,
+  MAX: 6
+});
 
 export const COMMENT_MESSAGES = [
   'Всё отлично!',

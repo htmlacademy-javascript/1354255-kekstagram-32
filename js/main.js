@@ -1,1 +1,1 @@
-import './create-data.js';
+import './mount-photos.js';
