@@ -9,7 +9,7 @@ import {
 } from './constants.js';
 import { createRandomIdFromRangeGenerator, getRandomInteger } from './utils.js';
 
-const generateCommentId = createRandomIdFromRangeGenerator(CommentsNumber.MIN, CommentsNumber.MAX * PhotosNumber.MAX);
+const generateCommentId = createRandomIdFromRangeGenerator(CommentsNumber.START_ID, CommentsNumber.MAX * PhotosNumber.MAX);
 
 const createComment = () => ({
   id: generateCommentId(),
@@ -28,7 +28,7 @@ const createPhoto = () => {
     url: `photos/${id}.jpg`,
     description: PHOTO_DESCRIPTIONS[id - 1] ?? '',
     likes: getRandomInteger(LikesNumber.MIN, LikesNumber.MAX),
-    comments: Array.from({ length: getRandomInteger(0, CommentsNumber.MAX) }, createComment),
+    comments: Array.from({ length: getRandomInteger(CommentsNumber.MIN, CommentsNumber.MAX) }, createComment),
   };
 };
 
