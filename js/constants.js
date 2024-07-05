@@ -67,3 +67,7 @@ export const PHOTO_DESCRIPTIONS = [
   'Вид с концерта, где много людей',
   'Белый джип заехал в водоем, рядом гиппопотам, который разинул пасть'
 ];
+
+export const Key = Object.freeze({
+  ESCAPE: 'Escape',
+});

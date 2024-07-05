@@ -1,20 +1,20 @@
 import {
-  COMMENT_MESSAGES,
-  USER_NAMES,
-  PHOTO_DESCRIPTIONS,
-  CommentsNumber,
-  PhotosNumber,
-  LikesNumber,
   AvatarsNumber,
+  COMMENT_MESSAGES,
+  CommentsNumber,
+  LikesNumber,
+  PHOTO_DESCRIPTIONS,
+  PhotosNumber,
+  USER_NAMES,
 } from './constants.js';
-import { getRandomInteger, createRandomIdFromRangeGenerator } from './utils.js';
+import { createRandomIdFromRangeGenerator, getRandomInteger } from './utils.js';
 
 const generateCommentId = createRandomIdFromRangeGenerator(CommentsNumber.MIN, CommentsNumber.MAX * PhotosNumber.MAX);
 
 const createComment = () => ({
   id: generateCommentId(),
   avatar: `img/avatar-${getRandomInteger(AvatarsNumber.MIN, AvatarsNumber.MAX)}.svg`,
-  message: getRandomInteger(0, COMMENT_MESSAGES.length - 1),
+  message: COMMENT_MESSAGES[getRandomInteger(0, COMMENT_MESSAGES.length - 1)],
   name: getRandomInteger(0, USER_NAMES.length - 1),
 });
 
