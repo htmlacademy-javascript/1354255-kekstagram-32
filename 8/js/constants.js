@@ -73,3 +73,10 @@ export const PHOTO_DESCRIPTIONS = [
 export const Key = Object.freeze({
   ESCAPE: 'Escape'
 });
+
+export const HIDDEN_BLOCK_CLASS = 'hidden';
+
+export const EmptyCommentsBlock = Object.freeze({
+  text: 'Пока нет комментариев. Оставьте первый',
+  class: 'social__comments--empty'
+});

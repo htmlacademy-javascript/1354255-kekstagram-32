@@ -1,3 +1,4 @@
+import { HIDDEN_BLOCK_CLASS } from './constants.js';
 import { renderPhotoInfo } from './render-fullscreen-photo.js';
 import { getPhotoById, isEscapeKey } from './utils.js';
 
@@ -5,7 +6,7 @@ const pictureModalElement = document.querySelector('.big-picture');
 const closeButton = document.querySelector('.big-picture__cancel');
 
 const openPictureModal = () => {
-  pictureModalElement.classList.remove('hidden');
+  pictureModalElement.classList.remove(HIDDEN_BLOCK_CLASS);
   document.body.classList.add('modal-open');
 
   closeButton.addEventListener('click', closePictureModal);
@@ -13,7 +14,7 @@ const openPictureModal = () => {
 };
 
 function closePictureModal () {
-  pictureModalElement.classList.add('hidden');
+  pictureModalElement.classList.add(HIDDEN_BLOCK_CLASS);
   document.body.classList.remove('modal-open');
 
   closeButton.removeEventListener('click', closePictureModal);
