@@ -73,3 +73,4 @@ export const PHOTO_DESCRIPTIONS = [
 export const Key = Object.freeze({
   ESCAPE: 'Escape'
 });
+export const HIDDEN_BLOCK_CLASS = 'hidden';
