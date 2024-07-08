@@ -1,4 +1,4 @@
-import { CommentsNumber } from './constants.js';
+import { CommentsNumber, EmptyCommentsBlock, HIDDEN_BLOCK_CLASS } from './constants.js';
 import { createCommentComponent, renderList } from './utils.js';
 
 const picturePreview = document.querySelector('.big-picture__preview');
@@ -19,31 +19,55 @@ const renderCommentsInRange = (comments, startValue, endValue) => {
   renderComments(comments.slice(startValue, endOfRange), commentsContainerElement);
 };
 
-export const renderPhotoInfo = (photo) => {
-  const { url = '', description = '', likes = 0, comments = [] } = photo;
-
+const showPicture = (url, description) => {
   pictureElement.src = url;
   pictureElement.alt = description;
-  likesCountElement.textContent = likes;
+};
+
+const showLikes = (likesCount) => {
+  likesCountElement.textContent = likesCount;
+};
+
+const showDescription = (description) => {
   descriptionElement.textContent = description;
+};
+
+const showCommentsTotalCount = (totalCount) => {
+  commentsTotalCountElement.textContent = totalCount;
+};
+
+const hideCommentsLoader = () => {
+  commentsLoaderElement.classList.add(HIDDEN_BLOCK_CLASS);
+};
+
+const hideCommentsList = () => {
+  commentsContainerElement.textContent = EmptyCommentsBlock.text;
+  commentsContainerElement.classList.add(EmptyCommentsBlock.class);
+  commentCountElement.classList.add(HIDDEN_BLOCK_CLASS);
+  hideCommentsLoader();
+};
+
+const resetComments = () => {
+  commentsContainerElement.innerHTML = '';
+  commentsContainerElement.classList.remove(EmptyCommentsBlock.class);
+  commentsLoaderElement.classList.remove(HIDDEN_BLOCK_CLASS);
+  commentCountElement.classList.remove(HIDDEN_BLOCK_CLASS);
+};
+
+const showComments = (comments) => {
+  let commentsToShow = comments.length < CommentsNumber.AMOUNT_TO_LOAD ? comments.length : CommentsNumber.AMOUNT_TO_LOAD;
+
+  resetComments();
+  showCommentsTotalCount(comments.length);
+  renderCommentsInRange(comments, 0, commentsToShow);
 
   if (!comments.length) {
-    commentsContainerElement.textContent = 'Пока нет комментариев. Оставьте первый';
-    commentsContainerElement.style.padding = '20px 15px 15px';
-    commentCountElement.classList.add('hidden');
-    commentsLoaderElement.classList.add('hidden');
-
+    hideCommentsList();
     return;
   }
 
-  let commentsToShow = comments.length < CommentsNumber.AMOUNT_TO_LOAD ? comments.length : CommentsNumber.AMOUNT_TO_LOAD;
-
-  commentsTotalCountElement.textContent = comments.length;
-  commentsContainerElement.innerHTML = '';
-  renderCommentsInRange(comments, 0, commentsToShow);
-
   if (commentsToShow >= comments.length) {
-    commentsLoaderElement.classList.add('hidden');
+    hideCommentsLoader();
     return;
   }
 
@@ -52,11 +76,19 @@ export const renderPhotoInfo = (photo) => {
     commentsToShow += CommentsNumber.AMOUNT_TO_LOAD;
 
     if (commentsToShow >= comments.length) {
-      commentsLoaderElement.classList.add('hidden');
+      hideCommentsLoader();
       commentsLoaderElement.removeEventListener('click', loadMoreComments);
     }
   };
 
-  commentsLoaderElement.classList.remove('hidden');
   commentsLoaderElement.addEventListener('click', loadMoreComments);
+};
+
+export const renderPhotoInfo = (photo) => {
+  const { url = '', description = '', likes = 0, comments = [] } = photo;
+
+  showPicture(url, description);
+  showLikes(likes);
+  showDescription(description);
+  showComments(comments);
 };
