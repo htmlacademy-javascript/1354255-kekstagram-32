@@ -913,6 +913,10 @@ main {
   padding-top: 20px;
 }
 
+.social__comments--empty {
+  padding: 20px 15px 15px;
+}
+
 .social__comment {
   padding-left: 15px;
   padding-right: 15px;
