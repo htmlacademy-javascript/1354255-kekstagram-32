@@ -80,3 +80,8 @@ export const EmptyCommentsBlock = Object.freeze({
   text: 'Пока нет комментариев. Оставьте первый',
   class: 'social__comments--empty'
 });
+
+export const ModalEnum = Object.freeze({
+  UPLOAD_PHOTO: 'upload-photo',
+  FULLSCREEN_PHOTO: 'fullscreen-photo',
+});
