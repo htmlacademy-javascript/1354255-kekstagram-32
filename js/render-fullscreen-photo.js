@@ -2,38 +2,36 @@ import { CommentsNumber, EmptyCommentsBlock, HIDDEN_BLOCK_CLASS } from './consta
 import { createCommentComponent, renderList } from './utils.js';
 
 const picturePreview = document.querySelector('.big-picture__preview');
-const pictureElement = picturePreview.querySelector('.big-picture__img > img');
-const likesCountElement = picturePreview.querySelector('.likes-count');
-const descriptionElement = picturePreview.querySelector('.social__caption');
 const commentsContainerElement = picturePreview.querySelector('.social__comments');
 const commentCountElement = picturePreview.querySelector('.social__comment-count');
-const commentsShownCountElement = commentCountElement.querySelector('.social__comment-shown-count');
-const commentsTotalCountElement = commentCountElement.querySelector('.social__comment-total-count');
 const commentsLoaderElement = picturePreview.querySelector('.comments-loader');
 
 const renderComments = (comments, commentsContainer) => renderList(comments, commentsContainer)(createCommentComponent);
+
 const renderCommentsInRange = (comments, startValue, endValue) => {
   const endOfRange = endValue > comments.length ? comments.length : endValue;
 
-  commentsShownCountElement.textContent = endOfRange;
+  commentCountElement.querySelector('.social__comment-shown-count').textContent = endOfRange;
   renderComments(comments.slice(startValue, endOfRange), commentsContainerElement);
 };
 
 const showPicture = (url, description) => {
+  const pictureElement = picturePreview.querySelector('.big-picture__img > img');
+
   pictureElement.src = url;
   pictureElement.alt = description;
 };
 
 const showLikes = (likesCount) => {
-  likesCountElement.textContent = likesCount;
+  picturePreview.querySelector('.likes-count').textContent = likesCount;
 };
 
 const showDescription = (description) => {
-  descriptionElement.textContent = description;
+  picturePreview.querySelector('.social__caption').textContent = description;
 };
 
 const showCommentsTotalCount = (totalCount) => {
-  commentsTotalCountElement.textContent = totalCount;
+  commentCountElement.querySelector('.social__comment-total-count').textContent = totalCount;
 };
 
 const hideCommentsLoader = () => {
