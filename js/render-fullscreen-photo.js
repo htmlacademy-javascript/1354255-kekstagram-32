@@ -1,5 +1,5 @@
 import { CommentsParams, EmptyCommentsBlock, HIDDEN_BLOCK_CLASS } from './constants';
-import { createCommentComponent, renderList } from './utils.js';
+import { createCommentComponent, renderList } from './utils';
 
 const picturePreviewElement = document.querySelector('.big-picture__preview');
 const commentsContainerElement = picturePreviewElement.querySelector('.social__comments');

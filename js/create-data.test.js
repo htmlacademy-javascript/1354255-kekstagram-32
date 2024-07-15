@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generatePhotos } from './create-data.js';
-import { hasUniqueValues } from './utils.js';
+import { hasUniqueValues } from './utils';
 
 expect.extend({
   toContainUnique(received) {

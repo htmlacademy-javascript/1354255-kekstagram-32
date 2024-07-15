@@ -4,7 +4,7 @@ import {
   isTargetInputField,
   lockBodyScroll,
   unlockBodyScroll
-} from './utils.js';
+} from './utils';
 
 let openedModal = null;
 

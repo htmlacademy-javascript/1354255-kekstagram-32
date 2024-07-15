@@ -1,7 +1,7 @@
 import { ModalEnum } from './constants';
 import { openModal } from './modal-plugin.js';
 import { renderPhotoInfo } from './render-fullscreen-photo.js';
-import { getPhotoById } from './utils.js';
+import { getPhotoById } from './utils';
 
 export const toggleFullscreenPhoto = (photos, photosContainerElement) => {
   const pictureModalElement = document.querySelector('.big-picture');

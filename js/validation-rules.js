@@ -1,5 +1,5 @@
 import { CommentFieldValidation, HASHTAG_REG_EXP, HashtagFieldValidation } from './constants';
-import { hasUniqueValues } from './utils.js';
+import { hasUniqueValues } from './utils';
 
 const isHashtagValid = (hashtag) => HASHTAG_REG_EXP.test(hashtag);
 

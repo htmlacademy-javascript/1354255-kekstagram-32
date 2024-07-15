@@ -7,7 +7,7 @@ import {
   PhotosParams,
   USER_NAMES,
 } from './constants';
-import { createRandomIdFromRangeGenerator, getRandomInteger } from './utils.js';
+import { createRandomIdFromRangeGenerator, getRandomInteger } from './utils';
 
 const generateCommentId = createRandomIdFromRangeGenerator(CommentsParams.START_ID, CommentsParams.MAX * PhotosParams.MAX);
 
