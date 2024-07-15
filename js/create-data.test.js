@@ -1,9 +1,10 @@
-import { describe, it, expect, beforeAll } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { generatePhotos } from './create-data.js';
+import { hasUniqueValues } from './utils.js';
 
 expect.extend({
   toContainUnique(received) {
-    const hasUnique = received.length === new Set(received).size;
+    const hasUnique = hasUniqueValues(received);
 
     if (hasUnique) {
       return {

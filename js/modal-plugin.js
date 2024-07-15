@@ -1,5 +1,10 @@
 import { HIDDEN_BLOCK_CLASS, ModalEnum } from './constants.js';
-import { isEscapeKey, lockBodyScroll, unlockBodyScroll } from './utils.js';
+import {
+  isEscapeKey,
+  isTargetInputField,
+  lockBodyScroll,
+  unlockBodyScroll
+} from './utils.js';
 
 let openedModal = null;
 
@@ -34,6 +39,10 @@ const resetOpenedModalParams = () => {
 
 function onDocumentKeydown (e) {
   if(!isEscapeKey(e)) {
+    return;
+  }
+
+  if (isTargetInputField(e.target)) {
     return;
   }
 

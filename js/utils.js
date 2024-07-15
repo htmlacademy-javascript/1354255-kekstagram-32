@@ -80,3 +80,7 @@ export const isEscapeKey = (e) => e.key === Key.ESCAPE;
 export const lockBodyScroll = () => document.body.classList.add('modal-open');
 
 export const unlockBodyScroll = () => document.body.classList.remove('modal-open');
+
+export const isTargetInputField = (target) => target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
+
+export const hasUniqueValues = (array) => array.length === new Set(array).size;

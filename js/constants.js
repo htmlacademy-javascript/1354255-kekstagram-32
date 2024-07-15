@@ -85,3 +85,17 @@ export const ModalEnum = Object.freeze({
   UPLOAD_PHOTO: 'upload-photo',
   FULLSCREEN_PHOTO: 'fullscreen-photo',
 });
+
+export const CommentFieldValidation = Object.freeze({
+  MAX_LENGTH: 140,
+  ERROR_TEXT: 'длина комментария больше 140 символов',
+});
+
+export const HashtagFieldValidation = Object.freeze({
+  MAX_AMOUNT: 5,
+  NOT_VALID: 'введён невалидный хэштег',
+  MAX_AMOUNT_EXCEEDED: 'превышено количество хэштегов (максимум 5)',
+  DUPLICATE_HASHTAGS: 'хэштеги повторяются',
+});
+
+export const HASHTAG_REGEXP = /^#[a-zа-яё0-9]{1,19}$/i;
