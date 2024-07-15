@@ -1,7 +1,7 @@
-import { CommentFieldValidation, HASHTAG_REGEXP, HashtagFieldValidation } from './constants.js';
+import { CommentFieldValidation, HASHTAG_REG_EXP, HashtagFieldValidation } from './constants';
 import { hasUniqueValues } from './utils.js';
 
-const isHashtagValid = (hashtag) => HASHTAG_REGEXP.test(hashtag);
+const isHashtagValid = (hashtag) => HASHTAG_REG_EXP.test(hashtag);
 
 let hashtagErrorMessage = null;
 

@@ -1,4 +1,4 @@
-import { CommentsNumber, EmptyCommentsBlock, HIDDEN_BLOCK_CLASS } from './constants.js';
+import { CommentsParams, EmptyCommentsBlock, HIDDEN_BLOCK_CLASS } from './constants';
 import { createCommentComponent, renderList } from './utils.js';
 
 const picturePreviewElement = document.querySelector('.big-picture__preview');
@@ -53,7 +53,7 @@ const resetComments = () => {
 };
 
 const showComments = (comments) => {
-  let commentsToShow = comments.length < CommentsNumber.AMOUNT_TO_LOAD ? comments.length : CommentsNumber.AMOUNT_TO_LOAD;
+  let commentsToShow = comments.length < CommentsParams.AMOUNT_TO_LOAD ? comments.length : CommentsParams.AMOUNT_TO_LOAD;
 
   resetComments();
   showCommentsTotalCount(comments.length);
@@ -70,8 +70,8 @@ const showComments = (comments) => {
   }
 
   const loadMoreCommentsHandler = () => {
-    renderCommentsInRange(comments, commentsToShow, commentsToShow + CommentsNumber.AMOUNT_TO_LOAD);
-    commentsToShow += CommentsNumber.AMOUNT_TO_LOAD;
+    renderCommentsInRange(comments, commentsToShow, commentsToShow + CommentsParams.AMOUNT_TO_LOAD);
+    commentsToShow += CommentsParams.AMOUNT_TO_LOAD;
 
     if (commentsToShow >= comments.length) {
       hideCommentsLoader();

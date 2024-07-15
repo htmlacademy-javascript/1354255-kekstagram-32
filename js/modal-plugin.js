@@ -1,4 +1,4 @@
-import { HIDDEN_BLOCK_CLASS, ModalEnum } from './constants.js';
+import { HIDDEN_BLOCK_CLASS, ModalEnum } from './constants';
 import {
   isEscapeKey,
   isTargetInputField,

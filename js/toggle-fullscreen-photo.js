@@ -1,4 +1,4 @@
-import { ModalEnum } from './constants.js';
+import { ModalEnum } from './constants';
 import { openModal } from './modal-plugin.js';
 import { renderPhotoInfo } from './render-fullscreen-photo.js';
 import { getPhotoById } from './utils.js';

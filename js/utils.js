@@ -1,4 +1,4 @@
-import { Key } from './constants.js';
+import { KeyEnum, STOP_ESCAPING_MODAL_ELEMENTS } from './constants';
 
 export const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -75,12 +75,12 @@ export const renderList = (list, containerElement) => (createComponent, template
   containerElement.append(fragment);
 };
 
-export const isEscapeKey = (evt) => evt.key === Key.ESCAPE;
+export const isEscapeKey = (evt) => evt.key === KeyEnum.ESCAPE;
 
 export const lockBodyScroll = () => document.body.classList.add('modal-open');
 
 export const unlockBodyScroll = () => document.body.classList.remove('modal-open');
 
-export const isTargetInputField = (target) => target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
+export const isTargetInputField = (target) => STOP_ESCAPING_MODAL_ELEMENTS.some((element) => target.classList.contains(element));
 
 export const hasUniqueValues = (array) => array.length === new Set(array).size;

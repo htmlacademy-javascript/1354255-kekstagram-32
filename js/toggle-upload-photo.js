@@ -1,4 +1,4 @@
-import { ModalEnum } from './constants.js';
+import { ModalEnum } from './constants';
 import { openModal } from './modal-plugin.js';
 
 const uploadPhotoTriggerElement = document.querySelector('.img-upload__input');
