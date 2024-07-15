@@ -8,16 +8,16 @@ const resetImageInputValue = () => {
 };
 
 export const toggleUploadPhoto = () => {
-  const photoEditForm = document.querySelector('.img-upload__overlay');
-  const closeButton = document.querySelector('.img-upload__cancel');
+  const photoEditFormElement = document.querySelector('.img-upload__overlay');
+  const closeButtonElement = document.querySelector('.img-upload__cancel');
 
   uploadPhotoTriggerElement.addEventListener('change', (evt) => {
     evt.preventDefault();
 
     openModal(ModalEnum.UPLOAD_PHOTO, {
-      closeButton,
-      modalElement: photoEditForm,
-      beforeCloseCb: resetImageInputValue
+      closeButtonElement,
+      modalElement: photoEditFormElement,
+      beforeCloseCallback: resetImageInputValue
     });
   });
 };

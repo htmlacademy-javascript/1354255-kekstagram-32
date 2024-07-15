@@ -1,10 +1,10 @@
 import { CommentsNumber, EmptyCommentsBlock, HIDDEN_BLOCK_CLASS } from './constants.js';
 import { createCommentComponent, renderList } from './utils.js';
 
-const picturePreview = document.querySelector('.big-picture__preview');
-const commentsContainerElement = picturePreview.querySelector('.social__comments');
-const commentCountElement = picturePreview.querySelector('.social__comment-count');
-const commentsLoaderElement = picturePreview.querySelector('.comments-loader');
+const picturePreviewElement = document.querySelector('.big-picture__preview');
+const commentsContainerElement = picturePreviewElement.querySelector('.social__comments');
+const commentCountElement = picturePreviewElement.querySelector('.social__comment-count');
+const commentsLoaderElement = picturePreviewElement.querySelector('.comments-loader');
 
 const renderComments = (comments, commentsContainer) => renderList(comments, commentsContainer)(createCommentComponent);
 
@@ -16,18 +16,18 @@ const renderCommentsInRange = (comments, startValue, endValue) => {
 };
 
 const showPicture = (url, description) => {
-  const pictureElement = picturePreview.querySelector('.big-picture__img > img');
+  const pictureElement = picturePreviewElement.querySelector('.big-picture__img > img');
 
   pictureElement.src = url;
   pictureElement.alt = description;
 };
 
 const showLikes = (likesCount) => {
-  picturePreview.querySelector('.likes-count').textContent = likesCount;
+  picturePreviewElement.querySelector('.likes-count').textContent = likesCount;
 };
 
 const showDescription = (description) => {
-  picturePreview.querySelector('.social__caption').textContent = description;
+  picturePreviewElement.querySelector('.social__caption').textContent = description;
 };
 
 const showCommentsTotalCount = (totalCount) => {
@@ -69,17 +69,17 @@ const showComments = (comments) => {
     return;
   }
 
-  const loadMoreComments = () => {
+  const loadMoreCommentsHandler = () => {
     renderCommentsInRange(comments, commentsToShow, commentsToShow + CommentsNumber.AMOUNT_TO_LOAD);
     commentsToShow += CommentsNumber.AMOUNT_TO_LOAD;
 
     if (commentsToShow >= comments.length) {
       hideCommentsLoader();
-      commentsLoaderElement.removeEventListener('click', loadMoreComments);
+      commentsLoaderElement.removeEventListener('click', loadMoreCommentsHandler);
     }
   };
 
-  commentsLoaderElement.addEventListener('click', loadMoreComments);
+  commentsLoaderElement.addEventListener('click', loadMoreCommentsHandler);
 };
 
 export const renderPhotoInfo = (photo) => {
