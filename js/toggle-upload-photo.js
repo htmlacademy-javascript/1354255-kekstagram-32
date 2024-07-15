@@ -11,8 +11,8 @@ export const toggleUploadPhoto = () => {
   const photoEditForm = document.querySelector('.img-upload__overlay');
   const closeButton = document.querySelector('.img-upload__cancel');
 
-  uploadPhotoTriggerElement.addEventListener('change', (e) => {
-    e.preventDefault();
+  uploadPhotoTriggerElement.addEventListener('change', (evt) => {
+    evt.preventDefault();
 
     openModal(ModalEnum.UPLOAD_PHOTO, {
       closeButton,

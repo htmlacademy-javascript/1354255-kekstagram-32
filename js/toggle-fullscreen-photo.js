@@ -7,8 +7,8 @@ export const toggleFullscreenPhoto = (photos, photosContainerElement) => {
   const pictureModalElement = document.querySelector('.big-picture');
   const closeButton = document.querySelector('.big-picture__cancel');
 
-  photosContainerElement.addEventListener('click', (e) => {
-    const picture = e.target.closest('.picture');
+  photosContainerElement.addEventListener('click', (evt) => {
+    const picture = evt.target.closest('.picture');
 
     if (!picture) {
       return;

@@ -37,16 +37,16 @@ const resetOpenedModalParams = () => {
   openedModal = null;
 };
 
-function onDocumentKeydown (e) {
-  if(!isEscapeKey(e)) {
+function onDocumentKeydown (evt) {
+  if(!isEscapeKey(evt)) {
     return;
   }
 
-  if (isTargetInputField(e.target)) {
+  if (isTargetInputField(evt.target)) {
     return;
   }
 
-  e.preventDefault();
+  evt.preventDefault();
   closeModal();
 }
 

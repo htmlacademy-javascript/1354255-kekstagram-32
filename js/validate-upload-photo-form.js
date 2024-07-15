@@ -21,8 +21,8 @@ pristine.addValidator(hashtagFieldElement, validateHashtagField, getHashtagError
 pristine.addValidator(commentFieldElement, validateCommentField, getCommentErrorMessage);
 
 export const validateUploadPhotoForm = () => {
-  uploadPhotoForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+  uploadPhotoForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
     const isValid = pristine.validate();
 

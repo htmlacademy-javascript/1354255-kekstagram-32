@@ -75,7 +75,7 @@ export const renderList = (list, containerElement) => (createComponent, template
   containerElement.append(fragment);
 };
 
-export const isEscapeKey = (e) => e.key === Key.ESCAPE;
+export const isEscapeKey = (evt) => evt.key === Key.ESCAPE;
 
 export const lockBodyScroll = () => document.body.classList.add('modal-open');
 
