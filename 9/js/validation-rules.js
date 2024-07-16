@@ -1,34 +1,37 @@
-import { CommentFieldValidation, HASHTAG_REGEXP, HashtagFieldValidation } from './constants.js';
-import { hasUniqueValues } from './utils.js';
+import { CommentFieldValidation } from './constants';
+import {
+  checkForHashtagAmount,
+  checkForHashtagDuplicates,
+  checkForValidHashtag
+} from './utils';
 
+const hashtagValidators = [
+  checkForValidHashtag,
+  checkForHashtagDuplicates,
+  checkForHashtagAmount,
+];
 
-const isHashtagValid = (hashtag) => HASHTAG_REGEXP.test(hashtag);
-
-let hashtagError = null;
+let hashtagErrorMessages = [];
 
 export const validateHashtagField = (value) => {
   const hashtags = value.split(/\s/).map((hashtag) => hashtag.toLowerCase()).filter(Boolean);
+  hashtagErrorMessages = [];
 
-  if (!hashtags.every(isHashtagValid)) {
-    hashtagError = HashtagFieldValidation.NOT_VALID;
-    return false;
-  }
+  hashtagValidators.reduce((errors, validator) => {
+    const error = validator(hashtags);
 
-  if (!hasUniqueValues(hashtags)) {
-    hashtagError = HashtagFieldValidation.DUPLICATE_HASHTAGS;
-    return false;
-  }
+    if (error) {
+      errors.push(error);
+    }
 
-  if (hashtags.length > HashtagFieldValidation.MAX_AMOUNT) {
-    hashtagError = HashtagFieldValidation.MAX_AMOUNT_EXCEEDED;
-    return false;
-  }
+    return errors;
+  }, hashtagErrorMessages);
 
-  return true;
+  return !hashtagErrorMessages.length;
 };
 
-export const getHashtagErrorMessage = () => hashtagError;
-
 export const validateCommentField = (value) => value.length <= CommentFieldValidation.MAX_LENGTH;
+
+export const getHashtagErrorMessage = () => hashtagErrorMessages[0] ?? '';
 
 export const getCommentErrorMessage = () => CommentFieldValidation.ERROR_TEXT;

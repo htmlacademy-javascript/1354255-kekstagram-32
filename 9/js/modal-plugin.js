@@ -1,75 +1,75 @@
-import { HIDDEN_BLOCK_CLASS, ModalEnum } from './constants.js';
+import { HIDDEN_BLOCK_CLASS, ModalEnum } from './constants';
 import {
   isEscapeKey,
   isTargetInputField,
   lockBodyScroll,
   unlockBodyScroll
-} from './utils.js';
+} from './utils';
 
 let openedModal = null;
 
 const modalParams = Object.values(ModalEnum).reduce((paramsList, modalName) => {
   paramsList[modalName] = {
-    closeButton: null,
+    closeButtonElement: null,
     modalElement: null
   };
 
   return paramsList;
 }, {});
 
-const assignOpenedModalParams = ({ modalName, modalElement, closeButton, beforeCloseCb }) => {
+const assignOpenedModalParams = ({ modalName, modalElement, closeButtonElement, beforeCloseCallback }) => {
   openedModal = modalName;
   modalParams[modalName].modalElement = modalElement;
-  modalParams[modalName].closeButton = closeButton;
+  modalParams[modalName].closeButtonElement = closeButtonElement;
 
-  if (beforeCloseCb) {
-    modalParams[modalName].onBeforeClose = beforeCloseCb;
+  if (beforeCloseCallback) {
+    modalParams[modalName].beforeCloseGuard = beforeCloseCallback;
   }
 };
 
 const resetOpenedModalParams = () => {
-  if (modalParams[openedModal].onBeforeClose) {
-    modalParams[openedModal].onBeforeClose = null;
+  if (modalParams[openedModal].beforeCloseGuard) {
+    modalParams[openedModal].beforeCloseGuard = null;
   }
 
   modalParams[openedModal].modalElement = null;
-  modalParams[openedModal].closeButton = null;
+  modalParams[openedModal].closeButtonElement = null;
   openedModal = null;
 };
 
-function onDocumentKeydown (e) {
-  if(!isEscapeKey(e)) {
+function documentKeydownHandler (evt) {
+  if(!isEscapeKey(evt)) {
     return;
   }
 
-  if (isTargetInputField(e.target)) {
+  if (isTargetInputField(evt.target)) {
     return;
   }
 
-  e.preventDefault();
-  closeModal();
+  evt.preventDefault();
+  closeModalHandler();
 }
 
-function closeModal () {
-  if (modalParams[openedModal].onBeforeClose) {
-    modalParams[openedModal].onBeforeClose();
+function closeModalHandler () {
+  if (modalParams[openedModal].beforeCloseGuard) {
+    modalParams[openedModal].beforeCloseGuard();
   }
 
   modalParams[openedModal].modalElement.classList.add(HIDDEN_BLOCK_CLASS);
   unlockBodyScroll();
 
-  modalParams[openedModal].closeButton.removeEventListener('click', closeModal);
-  document.removeEventListener('keydown', onDocumentKeydown);
+  modalParams[openedModal].closeButtonElement.removeEventListener('click', closeModalHandler);
+  document.removeEventListener('keydown', documentKeydownHandler);
 
   resetOpenedModalParams();
 }
 
-export const openModal = (modalName, { modalElement, closeButton, beforeCloseCb }) => {
-  assignOpenedModalParams({ modalName, modalElement, closeButton, beforeCloseCb });
+export const openModal = (modalName, { modalElement, closeButtonElement, beforeCloseCallback }) => {
+  assignOpenedModalParams({ modalName, modalElement, closeButtonElement, beforeCloseCallback });
 
   modalElement.classList.remove(HIDDEN_BLOCK_CLASS);
   lockBodyScroll();
 
-  closeButton.addEventListener('click', closeModal);
-  document.addEventListener('keydown', onDocumentKeydown);
+  closeButtonElement.addEventListener('click', closeModalHandler);
+  document.addEventListener('keydown', documentKeydownHandler);
 };
