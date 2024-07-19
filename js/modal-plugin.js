@@ -37,7 +37,7 @@ const resetOpenedModalParams = () => {
   openedModal = null;
 };
 
-function documentKeydownHandler (evt) {
+function documentKeydownHandler(evt) {
   if(!isEscapeKey(evt)) {
     return;
   }
@@ -50,7 +50,7 @@ function documentKeydownHandler (evt) {
   closeModalHandler();
 }
 
-function closeModalHandler () {
+function closeModalHandler() {
   if (modalParams[openedModal].beforeCloseGuard) {
     modalParams[openedModal].beforeCloseGuard();
   }

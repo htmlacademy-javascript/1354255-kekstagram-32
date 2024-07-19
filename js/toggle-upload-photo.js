@@ -1,3 +1,4 @@
+import { initPhotoScaleHandler, resetPhotoScaleHandler } from './change-photo-scale.js';
 import { ModalEnum } from './constants';
 import { openModal } from './modal-plugin.js';
 
@@ -14,10 +15,15 @@ export const toggleUploadPhoto = () => {
   uploadPhotoTriggerElement.addEventListener('change', (evt) => {
     evt.preventDefault();
 
+    initPhotoScaleHandler();
+
     openModal(ModalEnum.UPLOAD_PHOTO, {
       closeButtonElement,
       modalElement: photoEditFormElement,
-      beforeCloseCallback: resetImageInputValue
+      beforeCloseCallback: () => {
+        resetImageInputValue();
+        resetPhotoScaleHandler();
+      }
     });
   });
 };
