@@ -1,39 +1,37 @@
-import { CommentsNumber, EmptyCommentsBlock, HIDDEN_BLOCK_CLASS } from './constants.js';
-import { createCommentComponent, renderList } from './utils.js';
+import { CommentsParams, EmptyCommentsBlock, HIDDEN_BLOCK_CLASS } from './constants';
+import { createCommentComponent, renderList } from './utils';
 
-const picturePreview = document.querySelector('.big-picture__preview');
-const pictureElement = picturePreview.querySelector('.big-picture__img > img');
-const likesCountElement = picturePreview.querySelector('.likes-count');
-const descriptionElement = picturePreview.querySelector('.social__caption');
-const commentsContainerElement = picturePreview.querySelector('.social__comments');
-const commentCountElement = picturePreview.querySelector('.social__comment-count');
-const commentsShownCountElement = commentCountElement.querySelector('.social__comment-shown-count');
-const commentsTotalCountElement = commentCountElement.querySelector('.social__comment-total-count');
-const commentsLoaderElement = picturePreview.querySelector('.comments-loader');
+const picturePreviewElement = document.querySelector('.big-picture__preview');
+const commentsContainerElement = picturePreviewElement.querySelector('.social__comments');
+const commentCountElement = picturePreviewElement.querySelector('.social__comment-count');
+const commentsLoaderElement = picturePreviewElement.querySelector('.comments-loader');
 
 const renderComments = (comments, commentsContainer) => renderList(comments, commentsContainer)(createCommentComponent);
+
 const renderCommentsInRange = (comments, startValue, endValue) => {
   const endOfRange = endValue > comments.length ? comments.length : endValue;
 
-  commentsShownCountElement.textContent = endOfRange;
+  commentCountElement.querySelector('.social__comment-shown-count').textContent = endOfRange;
   renderComments(comments.slice(startValue, endOfRange), commentsContainerElement);
 };
 
 const showPicture = (url, description) => {
+  const pictureElement = picturePreviewElement.querySelector('.big-picture__img > img');
+
   pictureElement.src = url;
   pictureElement.alt = description;
 };
 
 const showLikes = (likesCount) => {
-  likesCountElement.textContent = likesCount;
+  picturePreviewElement.querySelector('.likes-count').textContent = likesCount;
 };
 
 const showDescription = (description) => {
-  descriptionElement.textContent = description;
+  picturePreviewElement.querySelector('.social__caption').textContent = description;
 };
 
 const showCommentsTotalCount = (totalCount) => {
-  commentsTotalCountElement.textContent = totalCount;
+  commentCountElement.querySelector('.social__comment-total-count').textContent = totalCount;
 };
 
 const hideCommentsLoader = () => {
@@ -55,7 +53,7 @@ const resetComments = () => {
 };
 
 const showComments = (comments) => {
-  let commentsToShow = comments.length < CommentsNumber.AMOUNT_TO_LOAD ? comments.length : CommentsNumber.AMOUNT_TO_LOAD;
+  let commentsToShow = comments.length < CommentsParams.AMOUNT_TO_LOAD ? comments.length : CommentsParams.AMOUNT_TO_LOAD;
 
   resetComments();
   showCommentsTotalCount(comments.length);
@@ -71,17 +69,17 @@ const showComments = (comments) => {
     return;
   }
 
-  const loadMoreComments = () => {
-    renderCommentsInRange(comments, commentsToShow, commentsToShow + CommentsNumber.AMOUNT_TO_LOAD);
-    commentsToShow += CommentsNumber.AMOUNT_TO_LOAD;
+  const loadMoreCommentsHandler = () => {
+    renderCommentsInRange(comments, commentsToShow, commentsToShow + CommentsParams.AMOUNT_TO_LOAD);
+    commentsToShow += CommentsParams.AMOUNT_TO_LOAD;
 
     if (commentsToShow >= comments.length) {
       hideCommentsLoader();
-      commentsLoaderElement.removeEventListener('click', loadMoreComments);
+      commentsLoaderElement.removeEventListener('click', loadMoreCommentsHandler);
     }
   };
 
-  commentsLoaderElement.addEventListener('click', loadMoreComments);
+  commentsLoaderElement.addEventListener('click', loadMoreCommentsHandler);
 };
 
 export const renderPhotoInfo = (photo) => {

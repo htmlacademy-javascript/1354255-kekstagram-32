@@ -1,21 +1,21 @@
-export const CommentsNumber = Object.freeze({
+export const CommentsParams = Object.freeze({
   MIN: 0,
   START_ID: 1,
   MAX: 30,
   AMOUNT_TO_LOAD: 5
 });
 
-export const PhotosNumber = Object.freeze({
+export const PhotosParams = Object.freeze({
   MIN: 1,
   MAX: 25
 });
 
-export const LikesNumber = Object.freeze({
+export const LikesParams = Object.freeze({
   MIN: 25,
   MAX: 200
 });
 
-export const AvatarsNumber = Object.freeze({
+export const AvatarsParams = Object.freeze({
   MIN: 1,
   MAX: 6
 });
@@ -69,14 +69,3 @@ export const PHOTO_DESCRIPTIONS = [
   'Вид с концерта, где много людей',
   'Белый джип заехал в водоем, рядом гиппопотам, который разинул пасть'
 ];
-
-export const Key = Object.freeze({
-  ESCAPE: 'Escape'
-});
-
-export const HIDDEN_BLOCK_CLASS = 'hidden';
-
-export const EmptyCommentsBlock = Object.freeze({
-  text: 'Пока нет комментариев. Оставьте первый',
-  class: 'social__comments--empty'
-});
