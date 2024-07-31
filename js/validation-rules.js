@@ -1,9 +1,13 @@
-import { CommentFieldValidation } from './constants';
 import {
   checkForHashtagAmount,
   checkForHashtagDuplicates,
   checkForValidHashtag
 } from './utils';
+
+const CommentFieldValidation = Object.freeze({
+  MAX_LENGTH: 140,
+  ERROR_TEXT: 'длина комментария больше 140 символов',
+});
 
 const hashtagValidators = [
   checkForValidHashtag,
