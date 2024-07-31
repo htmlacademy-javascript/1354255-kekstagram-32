@@ -1,8 +1,9 @@
-import { HIDDEN_BLOCK_CLASS, ModalEnum } from './constants';
 import {
+  HIDDEN_BLOCK_CLASS,
   isEscapeKey,
   isTargetInputField,
   lockBodyScroll,
+  ModalEnum,
   unlockBodyScroll
 } from './utils';
 
@@ -28,12 +29,15 @@ const assignOpenedModalParams = ({ modalName, modalElement, closeButtonElement, 
 };
 
 const resetOpenedModalParams = () => {
-  if (modalParams[openedModal].beforeCloseGuard) {
+  if (modalParams[openedModal]?.beforeCloseGuard) {
     modalParams[openedModal].beforeCloseGuard = null;
   }
 
-  modalParams[openedModal].modalElement = null;
-  modalParams[openedModal].closeButtonElement = null;
+  if (modalParams[openedModal]) {
+    modalParams[openedModal].modalElement = null;
+    modalParams[openedModal].closeButtonElement = null;
+  }
+
   openedModal = null;
 };
 
@@ -50,15 +54,15 @@ function documentKeydownHandler(evt) {
   closeModalHandler();
 }
 
-function closeModalHandler() {
-  if (modalParams[openedModal].beforeCloseGuard) {
+export function closeModalHandler() {
+  if (modalParams[openedModal]?.beforeCloseGuard) {
     modalParams[openedModal].beforeCloseGuard();
   }
 
-  modalParams[openedModal].modalElement.classList.add(HIDDEN_BLOCK_CLASS);
+  modalParams[openedModal]?.modalElement.classList.add(HIDDEN_BLOCK_CLASS);
   unlockBodyScroll();
 
-  modalParams[openedModal].closeButtonElement.removeEventListener('click', closeModalHandler);
+  modalParams[openedModal]?.closeButtonElement.removeEventListener('click', closeModalHandler);
   document.removeEventListener('keydown', documentKeydownHandler);
 
   resetOpenedModalParams();

@@ -1,5 +1,11 @@
-import { ScaleParams } from './constants';
 import { convertPercentToFraction } from './utils';
+
+const ScaleParams = {
+  DEFAULT: 100,
+  STEP: 25,
+  MIN: 25,
+  MAX: 100
+};
 
 const scaleDecreaseButtonElement = document.querySelector('.scale__control--smaller');
 const scaleIncreaseButtonElement = document.querySelector('.scale__control--bigger');

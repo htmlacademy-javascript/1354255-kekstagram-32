@@ -2,7 +2,7 @@ import {
   FilterNameEnum,
   FilterParams,
   HIDDEN_BLOCK_CLASS
-} from './constants';
+} from './utils';
 
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderContainerElement = document.querySelector('.img-upload__effect-level');
