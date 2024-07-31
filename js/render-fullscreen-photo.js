@@ -1,9 +1,19 @@
-import { CommentsParams, HIDDEN_BLOCK_CLASS } from './constants';
-import { createCommentComponent, renderList } from './utils';
+import {
+  createCommentComponent,
+  HIDDEN_BLOCK_CLASS,
+  renderList
+} from './utils';
 
 const EmptyCommentsBlockParams = Object.freeze({
   text: 'Пока нет комментариев. Оставьте первый',
   class: 'social__comments--empty'
+});
+
+export const CommentsParams = Object.freeze({
+  MIN: 0,
+  START_ID: 1,
+  MAX: 30,
+  AMOUNT_TO_LOAD: 5
 });
 
 const picturePreviewElement = document.querySelector('.big-picture__preview');

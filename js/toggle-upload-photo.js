@@ -1,8 +1,8 @@
 import { initPhotoScaleHandler, resetPhotoScaleHandler } from './change-photo-scale.js';
-import { ModalEnum } from './constants';
 import { openModal } from './modal-plugin.js';
 import { initFiltersHandler, resetFiltersHandler } from './photo-filters.js';
-import { validateUploadPhotoForm } from './validate-upload-photo-form.js';
+import { resetUploadForm, uploadPhotoFormHandler } from './upload-photo-form.js';
+import { ModalEnum } from './utils';
 
 const uploadPhotoTriggerElement = document.querySelector('.img-upload__input');
 
@@ -17,10 +17,6 @@ export const toggleUploadPhoto = () => {
   uploadPhotoTriggerElement.addEventListener('change', (evt) => {
     evt.preventDefault();
 
-    validateUploadPhotoForm();
-    initPhotoScaleHandler();
-    initFiltersHandler();
-
     openModal(ModalEnum.UPLOAD_PHOTO, {
       closeButtonElement,
       modalElement: photoEditFormElement,
@@ -28,7 +24,12 @@ export const toggleUploadPhoto = () => {
         resetImageInputValue();
         resetPhotoScaleHandler();
         resetFiltersHandler();
+        resetUploadForm();
       }
     });
+
+    initPhotoScaleHandler();
+    initFiltersHandler();
+    uploadPhotoFormHandler();
   });
 };

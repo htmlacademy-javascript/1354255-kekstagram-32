@@ -1,3 +1,20 @@
+export const HIDDEN_BLOCK_CLASS = 'hidden';
+
+export const EndpointEnum = Object.freeze({
+  GET_DATA: 'data',
+  SEND_DATA: ''
+});
+
+export const MethodEnum = Object.freeze({
+  GET: 'GET',
+  POST: 'POST'
+});
+
+export const ModalEnum = Object.freeze({
+  UPLOAD_PHOTO: 'uploadPhoto',
+  FULLSCREEN_PHOTO: 'fullscreenPhoto',
+});
+
 export const FilterNameEnum = {
   DEFAULT: 'none',
   CHROME: 'chrome',
