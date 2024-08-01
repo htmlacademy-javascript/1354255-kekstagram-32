@@ -6,6 +6,4 @@ const successMessageTemplate = document.querySelector('#success').content.queryS
 const successMessageElement = successMessageTemplate.cloneNode(true);
 const closeButtonElement = successMessageElement.querySelector('.success__button');
 
-export const showSuccessMessage = () => {
-  showMessage(successMessageElement, SUCCESS_DOM_ID, closeButtonElement);
-};
+export const showSuccessMessage = () => showMessage(successMessageElement, SUCCESS_DOM_ID, closeButtonElement);
