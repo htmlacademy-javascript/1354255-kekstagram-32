@@ -1,5 +1,5 @@
-import { renderGallery } from './render-gallery.js';
-import { toggleUploadPhoto } from './toggle-upload-photo.js';
+import { galleryHandler } from './gallery';
+import { uploadPhotoHandler } from './upload-photo';
 
-renderGallery();
-toggleUploadPhoto();
+galleryHandler();
+uploadPhotoHandler();

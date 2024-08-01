@@ -1,4 +1,4 @@
-import { isEscapeKey } from './utils';
+import { isEscapeKey } from '../utils';
 
 let showedMessageId = null;
 

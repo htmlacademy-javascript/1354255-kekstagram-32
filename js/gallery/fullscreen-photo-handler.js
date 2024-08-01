@@ -1,8 +1,8 @@
-import { openModal } from './modal-plugin.js';
-import { renderPhotoInfo } from './render-fullscreen-photo.js';
-import { getPhotoById, ModalEnum } from './utils';
+import { openModal } from '../modal-plugin.js';
+import { getPhotoById, ModalEnum } from '../utils';
+import { renderFullscreenPhoto } from './render-fullscreen-photo.js';
 
-export const toggleFullscreenPhoto = (photos, photosContainerElement) => {
+export const fullscreenPhotoHandler = (photos, photosContainerElement) => {
   const pictureModalElement = document.querySelector('.big-picture');
   const closeButtonElement = document.querySelector('.big-picture__cancel');
 
@@ -14,7 +14,7 @@ export const toggleFullscreenPhoto = (photos, photosContainerElement) => {
     }
 
     const photo = getPhotoById(picture.dataset.id, photos);
-    renderPhotoInfo(photo);
+    renderFullscreenPhoto(photo);
     openModal(ModalEnum.FULLSCREEN_PHOTO, { modalElement: pictureModalElement, closeButtonElement });
   });
 };

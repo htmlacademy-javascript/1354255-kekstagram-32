@@ -2,7 +2,7 @@ import {
   createCommentComponent,
   HIDDEN_BLOCK_CLASS,
   renderList
-} from './utils';
+} from '../utils';
 
 const EmptyCommentsBlockParams = Object.freeze({
   text: 'Пока нет комментариев. Оставьте первый',
@@ -97,7 +97,7 @@ const showComments = (comments) => {
   commentsLoaderElement.addEventListener('click', loadMoreCommentsHandler);
 };
 
-export const renderPhotoInfo = (photo) => {
+export const renderFullscreenPhoto = (photo) => {
   const { url = '', description = '', likes = 0, comments = [] } = photo;
 
   showPicture(url, description);

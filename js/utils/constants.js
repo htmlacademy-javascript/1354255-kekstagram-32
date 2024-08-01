@@ -15,7 +15,7 @@ export const ModalEnum = Object.freeze({
   FULLSCREEN_PHOTO: 'fullscreenPhoto',
 });
 
-export const FilterNameEnum = {
+export const EffectEnum = {
   DEFAULT: 'none',
   CHROME: 'chrome',
   SEPIA: 'sepia',
@@ -82,11 +82,17 @@ const heatParams = {
   }
 };
 
-export const FilterParams = Object.freeze({
-  [FilterNameEnum.DEFAULT]: defaultParams,
-  [FilterNameEnum.CHROME]: chromeParams,
-  [FilterNameEnum.SEPIA]: sepiaParams,
-  [FilterNameEnum.MARVIN]: marvinParams,
-  [FilterNameEnum.PHOBOS]: phobosParams,
-  [FilterNameEnum.HEAT]: heatParams
+export const EffectParams = Object.freeze({
+  [EffectEnum.DEFAULT]: defaultParams,
+  [EffectEnum.CHROME]: chromeParams,
+  [EffectEnum.SEPIA]: sepiaParams,
+  [EffectEnum.MARVIN]: marvinParams,
+  [EffectEnum.PHOBOS]: phobosParams,
+  [EffectEnum.HEAT]: heatParams
+});
+
+export const FilterEnum = Object.freeze({
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed'
 });

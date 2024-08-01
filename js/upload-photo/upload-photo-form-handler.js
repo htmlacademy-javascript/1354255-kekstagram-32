@@ -1,17 +1,17 @@
-import { showErrorMessage } from './error-message-modal.js';
-import { closeModalHandler } from './modal-plugin.js';
-import { showSuccessMessage } from './success-message-modal.js';
+import { showErrorMessage } from '../message-modal/error-message.js';
+import { showSuccessMessage } from '../message-modal/success-message.js';
+import { closeModalHandler } from '../modal-plugin.js';
 import {
   apiHandler,
   EndpointEnum,
   MethodEnum,
-} from './utils';
+} from '../utils';
 import {
   getCommentErrorMessage,
   getHashtagErrorMessage,
   validateCommentField,
   validateHashtagField
-} from './validation-rules.js';
+} from './form-validation-rules.js';
 
 const uploadPhotoFormElement = document.querySelector('.img-upload__form');
 const hashtagFieldElement = document.querySelector('.text__hashtags');
@@ -33,28 +33,30 @@ export const resetUploadForm = () => {
   uploadPhotoFormElement.reset();
 };
 
-export const uploadPhotoFormHandler = () => {
-  uploadPhotoFormElement.addEventListener('submit', async (evt) => {
-    evt.preventDefault();
+const submitHandler = async (evt) => {
+  evt.preventDefault();
 
-    const isValid = pristine.validate();
+  const isValid = pristine.validate();
 
-    if (isValid) {
-      submitButtonElement.disabled = true;
+  if (isValid) {
+    submitButtonElement.disabled = true;
 
-      const data = new FormData(uploadPhotoFormElement);
+    const data = new FormData(uploadPhotoFormElement);
 
-      try {
-        await apiHandler(EndpointEnum.SEND_DATA, MethodEnum.POST, data);
+    try {
+      await apiHandler(EndpointEnum.SEND_DATA, MethodEnum.POST, data);
 
-        resetUploadForm();
-        closeModalHandler();
-        showSuccessMessage();
-      } catch {
-        showErrorMessage();
-      } finally {
-        submitButtonElement.disabled = false;
-      }
+      resetUploadForm();
+      closeModalHandler();
+      showSuccessMessage();
+    } catch {
+      showErrorMessage();
+    } finally {
+      submitButtonElement.disabled = false;
     }
-  });
+  }
 };
+
+export const resetUploadPhotoFormHandler = () => uploadPhotoFormElement.removeEventListener('submit', submitHandler);
+
+export const initUploadPhotoFormHandler = () => uploadPhotoFormElement.addEventListener('submit', submitHandler);

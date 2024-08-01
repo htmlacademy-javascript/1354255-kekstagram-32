@@ -1,11 +1,11 @@
 const MESSAGE_HIDE_MS = 5000;
 const ERROR_DOM_ID = 'data-error';
 
-const hideError = () => {
+const hideAlert = () => {
   document.querySelector(`#${ERROR_DOM_ID}`).remove();
 };
 
-export const showError = (error) => {
+export const showAlert = (error) => {
   const errorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 
   const errorElement = errorTemplate.cloneNode(true);
@@ -19,6 +19,6 @@ export const showError = (error) => {
   document.body.insertAdjacentElement('beforeend', errorElement);
 
   setTimeout(() => {
-    hideError();
+    hideAlert();
   }, MESSAGE_HIDE_MS);
 };

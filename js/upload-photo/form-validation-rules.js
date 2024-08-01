@@ -2,7 +2,7 @@ import {
   checkForHashtagAmount,
   checkForHashtagDuplicates,
   checkForValidHashtag
-} from './utils';
+} from '../utils';
 
 const CommentFieldValidation = Object.freeze({
   MAX_LENGTH: 140,

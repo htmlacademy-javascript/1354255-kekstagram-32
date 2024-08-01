@@ -1,18 +1,18 @@
 import {
-  FilterNameEnum,
-  FilterParams,
+  EffectEnum,
+  EffectParams,
   HIDDEN_BLOCK_CLASS
-} from './utils';
+} from '../utils';
 
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderContainerElement = document.querySelector('.img-upload__effect-level');
-const filterInputElement = document.querySelector('.effect-level__value');
+const effectInputElement = document.querySelector('.effect-level__value');
 const imagePreviewElement = document.querySelector('.img-upload__preview img');
-const filtersElement = document.querySelector('.effects');
+const effectsElement = document.querySelector('.effects');
 
-let chosenFilter = FilterNameEnum.DEFAULT;
+let chosenEffect = EffectEnum.DEFAULT;
 
-const isDefault = () => chosenFilter === FilterNameEnum.DEFAULT;
+const isDefault = () => chosenEffect === EffectEnum.DEFAULT;
 
 const setImageStyle = () => {
   if (isDefault()) {
@@ -20,8 +20,8 @@ const setImageStyle = () => {
     return;
   }
 
-  const { value } = filterInputElement;
-  const { cssFilterName, units } = FilterParams[chosenFilter];
+  const { value } = effectInputElement;
+  const { cssFilterName, units } = EffectParams[chosenEffect];
   imagePreviewElement.style.filter = `${cssFilterName}(${value}${units})`;
 };
 
@@ -34,7 +34,7 @@ const hideSlider = () => {
 };
 
 const sliderUpdateHandler = () => {
-  filterInputElement.value = sliderElement.noUiSlider.get();
+  effectInputElement.value = sliderElement.noUiSlider.get();
   setImageStyle();
 };
 
@@ -67,32 +67,32 @@ const setSlider = () => {
     return;
   }
 
-  updateSlider(FilterParams[chosenFilter].config);
+  updateSlider(EffectParams[chosenEffect].config);
   showSlider();
 };
 
-const setFilter = (filter) => {
-  chosenFilter = filter;
+const setEffect = (filter) => {
+  chosenEffect = filter;
   setSlider();
   setImageStyle();
 };
 
-const changeFilterHandler = (evt) => {
-  setFilter(evt.target.value);
+const changeEffectHandler = (evt) => {
+  setEffect(evt.target.value);
 };
 
 const resetFilters = () => {
-  setFilter(FilterNameEnum.DEFAULT);
+  setEffect(EffectEnum.DEFAULT);
 };
 
 
-export const initFiltersHandler = () => {
-  createSlider(FilterParams[chosenFilter].config);
-  filtersElement.addEventListener('change', changeFilterHandler);
+export const initEffectsHandler = () => {
+  createSlider(EffectParams[chosenEffect].config);
+  effectsElement.addEventListener('change', changeEffectHandler);
 };
 
-export const resetFiltersHandler = () => {
+export const resetEffectsHandler = () => {
   resetFilters();
   sliderElement.noUiSlider.destroy();
-  filtersElement.removeEventListener('change', changeFilterHandler);
+  effectsElement.removeEventListener('change', changeEffectHandler);
 };

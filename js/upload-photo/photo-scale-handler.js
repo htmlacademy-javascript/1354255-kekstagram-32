@@ -1,4 +1,4 @@
-import { convertPercentToFraction } from './utils';
+import { convertPercentToFraction } from '../utils';
 
 const ScaleParams = {
   DEFAULT: 100,
