@@ -13,6 +13,8 @@ const KeyEnum = Object.freeze({
   ESCAPE: 'Escape'
 });
 
+const VALID_FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
 export const isEscapeKey = (evt) => evt.key === KeyEnum.ESCAPE;
 
 export const isTargetInputField = (target) => STOP_ESCAPING_MODAL_ELEMENTS.some((element) => target.classList.contains(element));
@@ -37,4 +39,9 @@ export const checkForHashtagAmount = (hashtags) => {
   if (hashtags.length > HashtagFieldValidation.MAX_AMOUNT) {
     return HashtagFieldValidation.MAX_AMOUNT_EXCEEDED;
   }
+};
+
+export const isValidFileType = (file) => {
+  const filename = file.name.toLowerCase();
+  return VALID_FILE_TYPES.some((type) => filename.endsWith(type));
 };
