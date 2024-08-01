@@ -39,6 +39,10 @@ const sliderUpdateHandler = () => {
 };
 
 const createSlider = ({ min, max, step }) => {
+  if (sliderElement.noUiSlider) {
+    return;
+  }
+
   noUiSlider.create(sliderElement, {
     step,
     range: { min, max },

@@ -49,7 +49,6 @@ function documentKeydownHandler(evt) {
     return;
   }
 
-  evt.preventDefault();
   closeModalHandler();
 }
 
