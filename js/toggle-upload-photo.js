@@ -1,5 +1,8 @@
-import { ModalEnum } from './constants';
+import { initPhotoScaleHandler, resetPhotoScaleHandler } from './change-photo-scale.js';
 import { openModal } from './modal-plugin.js';
+import { initFiltersHandler, resetFiltersHandler } from './photo-filters.js';
+import { resetUploadForm, uploadPhotoFormHandler } from './upload-photo-form.js';
+import { ModalEnum } from './utils';
 
 const uploadPhotoTriggerElement = document.querySelector('.img-upload__input');
 
@@ -17,7 +20,16 @@ export const toggleUploadPhoto = () => {
     openModal(ModalEnum.UPLOAD_PHOTO, {
       closeButtonElement,
       modalElement: photoEditFormElement,
-      beforeCloseCallback: resetImageInputValue
+      beforeCloseCallback: () => {
+        resetImageInputValue();
+        resetPhotoScaleHandler();
+        resetFiltersHandler();
+        resetUploadForm();
+      }
     });
+
+    initPhotoScaleHandler();
+    initFiltersHandler();
+    uploadPhotoFormHandler();
   });
 };

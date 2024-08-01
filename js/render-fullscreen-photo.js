@@ -1,5 +1,20 @@
-import { CommentsParams, EmptyCommentsBlock, HIDDEN_BLOCK_CLASS } from './constants';
-import { createCommentComponent, renderList } from './utils';
+import {
+  createCommentComponent,
+  HIDDEN_BLOCK_CLASS,
+  renderList
+} from './utils';
+
+const EmptyCommentsBlockParams = Object.freeze({
+  text: 'Пока нет комментариев. Оставьте первый',
+  class: 'social__comments--empty'
+});
+
+export const CommentsParams = Object.freeze({
+  MIN: 0,
+  START_ID: 1,
+  MAX: 30,
+  AMOUNT_TO_LOAD: 5
+});
 
 const picturePreviewElement = document.querySelector('.big-picture__preview');
 const commentsContainerElement = picturePreviewElement.querySelector('.social__comments');
@@ -39,15 +54,15 @@ const hideCommentsLoader = () => {
 };
 
 const hideCommentsList = () => {
-  commentsContainerElement.textContent = EmptyCommentsBlock.text;
-  commentsContainerElement.classList.add(EmptyCommentsBlock.class);
+  commentsContainerElement.textContent = EmptyCommentsBlockParams.text;
+  commentsContainerElement.classList.add(EmptyCommentsBlockParams.class);
   commentCountElement.classList.add(HIDDEN_BLOCK_CLASS);
   hideCommentsLoader();
 };
 
 const resetComments = () => {
   commentsContainerElement.innerHTML = '';
-  commentsContainerElement.classList.remove(EmptyCommentsBlock.class);
+  commentsContainerElement.classList.remove(EmptyCommentsBlockParams.class);
   commentsLoaderElement.classList.remove(HIDDEN_BLOCK_CLASS);
   commentCountElement.classList.remove(HIDDEN_BLOCK_CLASS);
 };
