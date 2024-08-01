@@ -3,9 +3,9 @@ import { FilterEnum } from '../utils';
 const MAX_RANDOM_PICTURES = 10;
 
 const sortByComments = (photos) =>
-  photos.sort((photoA, photoB) => photoB.comments.length - photoA.comments.length);
+  photos.toSorted((photoA, photoB) => photoB.comments.length - photoA.comments.length);
 
-const sortRandomly = (photos) => photos.sort(() => Math.random() - 0.5);
+const sortRandomly = (photos) => photos.toSorted(() => Math.random() - 0.5);
 
 export const sortPhotosHandler = (currentFilter, photos = []) => {
   switch (currentFilter) {
@@ -16,6 +16,6 @@ export const sortPhotosHandler = (currentFilter, photos = []) => {
       return sortByComments(photos);
 
     default:
-      return photos;
+      return [...photos];
   }
 };
