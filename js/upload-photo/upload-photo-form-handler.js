@@ -13,21 +13,25 @@ import {
   validateHashtagField
 } from './form-validation-rules.js';
 
-const uploadPhotoFormElement = document.querySelector('.img-upload__form');
-const hashtagFieldElement = document.querySelector('.text__hashtags');
-const commentFieldElement = document.querySelector('.text__description');
-const submitButtonElement = document.querySelector('.img-upload__submit');
-
 const pristineConfig = {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error'
 };
 
-const pristine = new Pristine(uploadPhotoFormElement, pristineConfig, false);
+const uploadPhotoFormElement = document.querySelector('.img-upload__form');
+const hashtagFieldElement = document.querySelector('.text__hashtags');
+const commentFieldElement = document.querySelector('.text__description');
+const submitButtonElement = document.querySelector('.img-upload__submit');
 
-pristine.addValidator(hashtagFieldElement, validateHashtagField, getHashtagErrorMessage);
-pristine.addValidator(commentFieldElement, validateCommentField, getCommentErrorMessage);
+const initValidationHandler = (uploadElement, hashtagElement, commentElement) => {
+  const pristine = new Pristine(uploadElement, pristineConfig, false);
+
+  pristine.addValidator(hashtagElement, validateHashtagField, getHashtagErrorMessage);
+  pristine.addValidator(commentElement, validateCommentField, getCommentErrorMessage);
+
+  return pristine;
+};
 
 export const resetUploadForm = () => {
   uploadPhotoFormElement.reset();
@@ -36,9 +40,9 @@ export const resetUploadForm = () => {
 const submitHandler = async (evt) => {
   evt.preventDefault();
 
-  const isValid = pristine.validate();
+  const pristine = initValidationHandler(uploadPhotoFormElement, hashtagFieldElement, commentFieldElement);
 
-  if (isValid) {
+  if (pristine.validate()) {
     submitButtonElement.disabled = true;
 
     const data = new FormData(uploadPhotoFormElement);
@@ -53,6 +57,7 @@ const submitHandler = async (evt) => {
       showErrorMessage();
     } finally {
       submitButtonElement.disabled = false;
+      pristine.destroy();
     }
   }
 };
