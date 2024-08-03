@@ -1,5 +1,5 @@
 import { openModal } from '../modal-plugin.js';
-import { getPhotoById, ModalEnum } from '../utils/index.js';
+import { getPhotoById, ModalEnum } from '../utils';
 import { renderFullscreenPhoto, resetFullscreenPhoto } from './render-fullscreen-photo.js';
 
 export const initFullscreenPhoto = (photos, photosContainerElement) => {
