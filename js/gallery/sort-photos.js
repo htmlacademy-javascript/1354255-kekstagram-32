@@ -7,7 +7,7 @@ const sortByComments = (photos) =>
 
 const sortRandomly = (photos) => photos.toSorted(() => Math.random() - 0.5);
 
-export const sortPhotosHandler = (currentFilter, photos = []) => {
+export const getSortedPhotos = (currentFilter, photos = []) => {
   switch (currentFilter) {
     case FilterEnum.RANDOM:
       return sortRandomly(photos).slice(0, MAX_RANDOM_PICTURES);

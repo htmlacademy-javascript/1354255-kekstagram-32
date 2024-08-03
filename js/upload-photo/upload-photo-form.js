@@ -2,10 +2,10 @@ import { showErrorMessage } from '../message-modal/error-message.js';
 import { showSuccessMessage } from '../message-modal/success-message.js';
 import { closeModalHandler } from '../modal-plugin.js';
 import {
-  apiHandler,
   EndpointEnum,
+  loadData,
   MethodEnum,
-} from '../utils';
+} from '../utils/index.js';
 import {
   getCommentErrorMessage,
   getHashtagErrorMessage,
@@ -24,7 +24,7 @@ const hashtagFieldElement = document.querySelector('.text__hashtags');
 const commentFieldElement = document.querySelector('.text__description');
 const submitButtonElement = document.querySelector('.img-upload__submit');
 
-const initValidationHandler = (uploadElement, hashtagElement, commentElement) => {
+const initValidation = (uploadElement, hashtagElement, commentElement) => {
   const pristine = new Pristine(uploadElement, pristineConfig, false);
 
   pristine.addValidator(hashtagElement, validateHashtagField, getHashtagErrorMessage);
@@ -40,7 +40,7 @@ export const resetUploadForm = () => {
 const submitHandler = async (evt) => {
   evt.preventDefault();
 
-  const pristine = initValidationHandler(uploadPhotoFormElement, hashtagFieldElement, commentFieldElement);
+  const pristine = initValidation(uploadPhotoFormElement, hashtagFieldElement, commentFieldElement);
 
   if (pristine.validate()) {
     submitButtonElement.disabled = true;
@@ -48,7 +48,7 @@ const submitHandler = async (evt) => {
     const data = new FormData(uploadPhotoFormElement);
 
     try {
-      await apiHandler(EndpointEnum.SEND_DATA, MethodEnum.POST, data);
+      await loadData(EndpointEnum.SEND_DATA, MethodEnum.POST, data);
 
       resetUploadForm();
       closeModalHandler();
@@ -62,6 +62,6 @@ const submitHandler = async (evt) => {
   }
 };
 
-export const resetUploadPhotoFormHandler = () => uploadPhotoFormElement.removeEventListener('submit', submitHandler);
+export const resetUploadPhotoForm = () => uploadPhotoFormElement.removeEventListener('submit', submitHandler);
 
-export const initUploadPhotoFormHandler = () => uploadPhotoFormElement.addEventListener('submit', submitHandler);
+export const initUploadPhotoForm = () => uploadPhotoFormElement.addEventListener('submit', submitHandler);

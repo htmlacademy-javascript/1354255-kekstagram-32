@@ -90,12 +90,12 @@ const resetFilters = () => {
 };
 
 
-export const initEffectsHandler = () => {
+export const initEffects = () => {
   createSlider(EffectParams[chosenEffect].config);
   effectsElement.addEventListener('change', changeEffectHandler);
 };
 
-export const resetEffectsHandler = () => {
+export const resetEffects = () => {
   resetFilters();
   sliderElement.noUiSlider.destroy();
   effectsElement.removeEventListener('change', changeEffectHandler);

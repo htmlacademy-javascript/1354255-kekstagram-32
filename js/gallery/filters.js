@@ -25,7 +25,7 @@ const initFilters = (cb) => {
   });
 };
 
-export const filtersHandler = (cb) => {
+export const showFilters = (cb) => {
   filtersElement.classList.remove('img-filters--inactive');
   initFilters(cb);
 };

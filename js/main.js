@@ -1,5 +1,5 @@
-import { galleryHandler } from './gallery';
-import { uploadPhotoHandler } from './upload-photo';
+import { initGallery } from './gallery';
+import { initUploadPhoto } from './upload-photo';
 
-galleryHandler();
-uploadPhotoHandler();
+initGallery();
+initUploadPhoto();

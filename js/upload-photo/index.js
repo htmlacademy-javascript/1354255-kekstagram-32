@@ -1,8 +1,8 @@
 import { openModal } from '../modal-plugin.js';
 import { ModalEnum, isValidFileType } from '../utils';
-import { initEffectsHandler, resetEffectsHandler } from './photo-effects-handler.js';
-import { initPhotoScaleHandler, resetPhotoScaleHandler } from './photo-scale-handler.js';
-import { initUploadPhotoFormHandler, resetUploadForm, resetUploadPhotoFormHandler } from './upload-photo-form-handler.js';
+import { initEffects, resetEffects } from './photo-effects.js';
+import { initPhotoScale, resetPhotoScale } from './photo-scale.js';
+import { initUploadPhotoForm, resetUploadForm, resetUploadPhotoForm } from './upload-photo-form.js';
 
 const uploadPhotoTriggerElement = document.querySelector('.img-upload__input');
 
@@ -10,7 +10,7 @@ const resetImageInputValue = () => {
   uploadPhotoTriggerElement.value = null;
 };
 
-export const uploadPhotoHandler = () => {
+export const initUploadPhoto = () => {
   const photoEditFormElement = document.querySelector('.img-upload__overlay');
   const closeButtonElement = document.querySelector('.img-upload__cancel');
   const photoPreviewElement = document.querySelector('.img-upload__preview img');
@@ -32,15 +32,15 @@ export const uploadPhotoHandler = () => {
       modalElement: photoEditFormElement,
       beforeCloseCallback: () => {
         resetImageInputValue();
-        resetPhotoScaleHandler();
-        resetEffectsHandler();
+        resetPhotoScale();
+        resetEffects();
         resetUploadForm();
-        resetUploadPhotoFormHandler();
+        resetUploadPhotoForm();
       }
     });
 
-    initPhotoScaleHandler();
-    initEffectsHandler();
-    initUploadPhotoFormHandler();
+    initPhotoScale();
+    initEffects();
+    initUploadPhotoForm();
   });
 };

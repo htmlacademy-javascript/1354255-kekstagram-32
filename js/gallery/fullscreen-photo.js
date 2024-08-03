@@ -1,8 +1,8 @@
 import { openModal } from '../modal-plugin.js';
-import { getPhotoById, ModalEnum } from '../utils';
+import { getPhotoById, ModalEnum } from '../utils/index.js';
 import { renderFullscreenPhoto, resetFullscreenPhoto } from './render-fullscreen-photo.js';
 
-export const fullscreenPhotoHandler = (photos, photosContainerElement) => {
+export const initFullscreenPhoto = (photos, photosContainerElement) => {
   const pictureModalElement = document.querySelector('.big-picture');
   const closeButtonElement = document.querySelector('.big-picture__cancel');
 
