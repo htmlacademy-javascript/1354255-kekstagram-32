@@ -5,7 +5,7 @@ import {
   EndpointEnum,
   loadData,
   MethodEnum,
-} from '../utils/index.js';
+} from '../utils';
 import {
   getCommentErrorMessage,
   getHashtagErrorMessage,
