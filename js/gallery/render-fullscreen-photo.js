@@ -2,7 +2,7 @@ import {
   createCommentComponent,
   HIDDEN_BLOCK_CLASS,
   renderList
-} from './utils';
+} from '../utils';
 
 const EmptyCommentsBlockParams = Object.freeze({
   text: 'Пока нет комментариев. Оставьте первый',
@@ -20,6 +20,9 @@ const picturePreviewElement = document.querySelector('.big-picture__preview');
 const commentsContainerElement = picturePreviewElement.querySelector('.social__comments');
 const commentCountElement = picturePreviewElement.querySelector('.social__comment-count');
 const commentsLoaderElement = picturePreviewElement.querySelector('.comments-loader');
+
+let commentsToShow = 0;
+let commentsList = [];
 
 const renderComments = (comments, commentsContainer) => renderList(comments, commentsContainer)(createCommentComponent);
 
@@ -67,41 +70,48 @@ const resetComments = () => {
   commentCountElement.classList.remove(HIDDEN_BLOCK_CLASS);
 };
 
-const showComments = (comments) => {
-  let commentsToShow = comments.length < CommentsParams.AMOUNT_TO_LOAD ? comments.length : CommentsParams.AMOUNT_TO_LOAD;
+const loadMoreCommentsHandler = () => {
+  renderCommentsInRange(commentsList, commentsToShow, commentsToShow + CommentsParams.AMOUNT_TO_LOAD);
+  commentsToShow += CommentsParams.AMOUNT_TO_LOAD;
+
+  if (commentsToShow >= commentsList.length) {
+    hideCommentsLoader();
+    commentsLoaderElement.removeEventListener('click', loadMoreCommentsHandler);
+  }
+};
+
+const showComments = () => {
+  commentsToShow = commentsList.length < CommentsParams.AMOUNT_TO_LOAD ? commentsList.length : CommentsParams.AMOUNT_TO_LOAD;
 
   resetComments();
-  showCommentsTotalCount(comments.length);
-  renderCommentsInRange(comments, 0, commentsToShow);
+  showCommentsTotalCount(commentsList.length);
+  renderCommentsInRange(commentsList, 0, commentsToShow);
 
-  if (!comments.length) {
+  if (!commentsList.length) {
     hideCommentsList();
     return;
   }
 
-  if (commentsToShow >= comments.length) {
+  if (commentsToShow >= commentsList.length) {
     hideCommentsLoader();
     return;
   }
 
-  const loadMoreCommentsHandler = () => {
-    renderCommentsInRange(comments, commentsToShow, commentsToShow + CommentsParams.AMOUNT_TO_LOAD);
-    commentsToShow += CommentsParams.AMOUNT_TO_LOAD;
-
-    if (commentsToShow >= comments.length) {
-      hideCommentsLoader();
-      commentsLoaderElement.removeEventListener('click', loadMoreCommentsHandler);
-    }
-  };
-
   commentsLoaderElement.addEventListener('click', loadMoreCommentsHandler);
 };
 
-export const renderPhotoInfo = (photo) => {
+export const resetFullscreenPhoto = () => {
+  commentsToShow = 0;
+  commentsLoaderElement.removeEventListener('click', loadMoreCommentsHandler);
+};
+
+export const renderFullscreenPhoto = (photo) => {
   const { url = '', description = '', likes = 0, comments = [] } = photo;
+
+  commentsList = comments;
 
   showPicture(url, description);
   showLikes(likes);
   showDescription(description);
-  showComments(comments);
+  showComments();
 };

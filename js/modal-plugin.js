@@ -20,6 +20,7 @@ const modalParams = Object.values(ModalEnum).reduce((paramsList, modalName) => {
 
 const assignOpenedModalParams = ({ modalName, modalElement, closeButtonElement, beforeCloseCallback }) => {
   openedModal = modalName;
+
   modalParams[modalName].modalElement = modalElement;
   modalParams[modalName].closeButtonElement = closeButtonElement;
 
@@ -29,14 +30,12 @@ const assignOpenedModalParams = ({ modalName, modalElement, closeButtonElement, 
 };
 
 const resetOpenedModalParams = () => {
-  if (modalParams[openedModal]?.beforeCloseGuard) {
+  if (modalParams[openedModal].beforeCloseGuard) {
     modalParams[openedModal].beforeCloseGuard = null;
   }
 
-  if (modalParams[openedModal]) {
-    modalParams[openedModal].modalElement = null;
-    modalParams[openedModal].closeButtonElement = null;
-  }
+  modalParams[openedModal].modalElement = null;
+  modalParams[openedModal].closeButtonElement = null;
 
   openedModal = null;
 };
@@ -50,16 +49,15 @@ function documentKeydownHandler(evt) {
     return;
   }
 
-  evt.preventDefault();
   closeModalHandler();
 }
 
 export function closeModalHandler() {
-  if (modalParams[openedModal]?.beforeCloseGuard) {
+  if (modalParams[openedModal].beforeCloseGuard) {
     modalParams[openedModal].beforeCloseGuard();
   }
 
-  modalParams[openedModal]?.modalElement.classList.add(HIDDEN_BLOCK_CLASS);
+  modalParams[openedModal].modalElement.classList.add(HIDDEN_BLOCK_CLASS);
   unlockBodyScroll();
 
   modalParams[openedModal]?.closeButtonElement.removeEventListener('click', closeModalHandler);

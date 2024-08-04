@@ -1,4 +1,4 @@
-import { convertPercentToFraction } from './utils';
+import { convertPercentToFraction } from '../utils';
 
 const ScaleParams = {
   DEFAULT: 100,
@@ -68,14 +68,14 @@ const increaseButtonHandler = () => {
   updateImageScaleStyle(currentScale);
 };
 
-export const initPhotoScaleHandler = () => {
+export const initPhotoScale = () => {
   setDefaultParams();
 
   scaleDecreaseButtonElement.addEventListener('click', decreaseButtonHandler);
   scaleIncreaseButtonElement.addEventListener('click', increaseButtonHandler);
 };
 
-export const resetPhotoScaleHandler = () => {
+export const resetPhotoScale = () => {
   setDefaultParams();
 
   scaleDecreaseButtonElement.removeEventListener('click', decreaseButtonHandler);

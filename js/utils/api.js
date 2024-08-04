@@ -2,7 +2,7 @@ import { MethodEnum } from './constants.js';
 
 const BASE_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
 
-export const apiHandler = async (endpoint, method = MethodEnum.GET, body = null) => {
+export const loadData = async (endpoint, method = MethodEnum.GET, body = null) => {
   try {
     const response = await fetch(`${BASE_URL}/${endpoint}`, { method, body });
 
