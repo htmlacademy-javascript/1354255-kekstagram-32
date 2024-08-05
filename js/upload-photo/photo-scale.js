@@ -36,7 +36,7 @@ const setDisabled = (element) => {
   element.disabled = true;
 };
 
-const decreaseButtonHandler = () => {
+const scaleDecreaseButtonElementClickHandler = () => {
   if (currentScale <= ScaleParams.MIN) {
     setDisabled(scaleDecreaseButtonElement);
     return;
@@ -52,7 +52,7 @@ const decreaseButtonHandler = () => {
   updateImageScaleStyle(currentScale);
 };
 
-const increaseButtonHandler = () => {
+const scaleIncreaseButtonElementClickHandler = () => {
   if (currentScale >= ScaleParams.MAX) {
     setDisabled(scaleIncreaseButtonElement);
     return;
@@ -71,13 +71,13 @@ const increaseButtonHandler = () => {
 export const initPhotoScale = () => {
   setDefaultParams();
 
-  scaleDecreaseButtonElement.addEventListener('click', decreaseButtonHandler);
-  scaleIncreaseButtonElement.addEventListener('click', increaseButtonHandler);
+  scaleDecreaseButtonElement.addEventListener('click', scaleDecreaseButtonElementClickHandler);
+  scaleIncreaseButtonElement.addEventListener('click', scaleIncreaseButtonElementClickHandler);
 };
 
 export const resetPhotoScale = () => {
   setDefaultParams();
 
-  scaleDecreaseButtonElement.removeEventListener('click', decreaseButtonHandler);
-  scaleIncreaseButtonElement.removeEventListener('click', increaseButtonHandler);
+  scaleDecreaseButtonElement.removeEventListener('click', scaleDecreaseButtonElementClickHandler);
+  scaleIncreaseButtonElement.removeEventListener('click', scaleIncreaseButtonElementClickHandler);
 };
