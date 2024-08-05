@@ -23,8 +23,9 @@ export const initUploadPhoto = () => {
 
     if (file && isValidFileType(file)) {
       photoPreviewElement.src = URL.createObjectURL(file);
-      effectPreviewElements.forEach((preview) =>
-        (preview.style.backgroundImage = `url('${photoPreviewElement.src}')`));
+      effectPreviewElements.forEach((preview) => {
+        preview.style.backgroundImage = `url('${photoPreviewElement.src}')`;
+      });
     }
 
     openModal(ModalEnum.UPLOAD_PHOTO, {

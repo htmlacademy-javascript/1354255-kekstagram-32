@@ -70,13 +70,13 @@ const resetComments = () => {
   commentCountElement.classList.remove(HIDDEN_BLOCK_CLASS);
 };
 
-const loadMoreCommentsHandler = () => {
+const commentsLoaderElementClickHandler = () => {
   renderCommentsInRange(commentsList, commentsToShow, commentsToShow + CommentsParams.AMOUNT_TO_LOAD);
   commentsToShow += CommentsParams.AMOUNT_TO_LOAD;
 
   if (commentsToShow >= commentsList.length) {
     hideCommentsLoader();
-    commentsLoaderElement.removeEventListener('click', loadMoreCommentsHandler);
+    commentsLoaderElement.removeEventListener('click', commentsLoaderElementClickHandler);
   }
 };
 
@@ -97,12 +97,12 @@ const showComments = () => {
     return;
   }
 
-  commentsLoaderElement.addEventListener('click', loadMoreCommentsHandler);
+  commentsLoaderElement.addEventListener('click', commentsLoaderElementClickHandler);
 };
 
 export const resetFullscreenPhoto = () => {
   commentsToShow = 0;
-  commentsLoaderElement.removeEventListener('click', loadMoreCommentsHandler);
+  commentsLoaderElement.removeEventListener('click', commentsLoaderElementClickHandler);
 };
 
 export const renderFullscreenPhoto = (photo) => {

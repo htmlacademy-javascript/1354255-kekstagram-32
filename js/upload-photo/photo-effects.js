@@ -81,7 +81,7 @@ const setEffect = (filter) => {
   setImageStyle();
 };
 
-const changeEffectHandler = (evt) => {
+const effectsElementChangeHandler = (evt) => {
   setEffect(evt.target.value);
 };
 
@@ -92,11 +92,11 @@ const resetFilters = () => {
 
 export const initEffects = () => {
   createSlider(EffectParams[chosenEffect].config);
-  effectsElement.addEventListener('change', changeEffectHandler);
+  effectsElement.addEventListener('change', effectsElementChangeHandler);
 };
 
 export const resetEffects = () => {
   resetFilters();
   sliderElement.noUiSlider.destroy();
-  effectsElement.removeEventListener('change', changeEffectHandler);
+  effectsElement.removeEventListener('change', effectsElementChangeHandler);
 };
