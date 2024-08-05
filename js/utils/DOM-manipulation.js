@@ -33,10 +33,10 @@ export const createCommentComponent = (comment) => {
   return listElement;
 };
 
-export const renderList = (list, containerElement) => (createComponent, template = '') => {
+export const renderList = (elements, containerElement) => (createComponent, template = '') => {
   const fragment = document.createDocumentFragment();
 
-  list.forEach((element) => fragment.append(createComponent(element, template)));
+  elements.forEach((element) => fragment.append(createComponent(element, template)));
 
   containerElement.append(fragment);
 };
