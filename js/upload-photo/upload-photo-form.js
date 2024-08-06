@@ -1,6 +1,6 @@
 import { showErrorMessage } from '../message-modal/error-message.js';
 import { showSuccessMessage } from '../message-modal/success-message.js';
-import { closeModalHandler } from '../modal-plugin.js';
+import { modalCloseHandler } from '../modal-plugin.js';
 import {
   EndpointEnum,
   loadData,
@@ -37,7 +37,7 @@ export const resetUploadForm = () => {
   uploadPhotoFormElement.reset();
 };
 
-const submitHandler = async (evt) => {
+const uploadPhotoFormSubmitHandler = async (evt) => {
   evt.preventDefault();
 
   const pristine = initValidation(uploadPhotoFormElement, hashtagFieldElement, commentFieldElement);
@@ -51,7 +51,7 @@ const submitHandler = async (evt) => {
       await loadData(EndpointEnum.SEND_DATA, MethodEnum.POST, data);
 
       resetUploadForm();
-      closeModalHandler();
+      modalCloseHandler();
       showSuccessMessage();
     } catch {
       showErrorMessage();
@@ -62,6 +62,6 @@ const submitHandler = async (evt) => {
   }
 };
 
-export const resetUploadPhotoForm = () => uploadPhotoFormElement.removeEventListener('submit', submitHandler);
+export const resetUploadPhotoForm = () => uploadPhotoFormElement.removeEventListener('submit', uploadPhotoFormSubmitHandler);
 
-export const initUploadPhotoForm = () => uploadPhotoFormElement.addEventListener('submit', submitHandler);
+export const initUploadPhotoForm = () => uploadPhotoFormElement.addEventListener('submit', uploadPhotoFormSubmitHandler);

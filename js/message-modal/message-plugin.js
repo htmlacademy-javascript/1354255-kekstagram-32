@@ -12,11 +12,11 @@ function documentKeydownHandler(evt) {
     return;
   }
 
-  closeMessageHandler();
+  messageCloseHandler();
   evt.stopImmediatePropagation();
 }
 
-function closeMessageHandler() {
+function messageCloseHandler() {
   document.removeEventListener('keydown', documentKeydownHandler, true);
   document.querySelector(`#${showedMessageId}`).remove();
 }
@@ -25,11 +25,11 @@ export const showMessage = (messageElement, id, closeButtonElement) => {
   showedMessageId = id;
   renderMessage(messageElement);
 
-  closeButtonElement.addEventListener('click', closeMessageHandler);
+  closeButtonElement.addEventListener('click', messageCloseHandler);
   document.addEventListener('keydown', documentKeydownHandler, true);
   messageElement.addEventListener('click', (evt) => {
     if (evt.target.matches(`#${id}`)) {
-      closeMessageHandler();
+      messageCloseHandler();
     }
   });
 };
