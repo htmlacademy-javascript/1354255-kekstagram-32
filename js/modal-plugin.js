@@ -49,10 +49,10 @@ function documentKeydownHandler(evt) {
     return;
   }
 
-  closeModalHandler();
+  modalCloseHandler();
 }
 
-export function closeModalHandler() {
+export function modalCloseHandler() {
   if (modalParams[openedModal].beforeCloseGuard) {
     modalParams[openedModal].beforeCloseGuard();
   }
@@ -60,7 +60,7 @@ export function closeModalHandler() {
   modalParams[openedModal].modalElement.classList.add(HIDDEN_BLOCK_CLASS);
   unlockBodyScroll();
 
-  modalParams[openedModal]?.closeButtonElement.removeEventListener('click', closeModalHandler);
+  modalParams[openedModal]?.closeButtonElement.removeEventListener('click', modalCloseHandler);
   document.removeEventListener('keydown', documentKeydownHandler);
 
   resetOpenedModalParams();
@@ -72,6 +72,6 @@ export const openModal = (modalName, { modalElement, closeButtonElement, beforeC
   modalElement.classList.remove(HIDDEN_BLOCK_CLASS);
   lockBodyScroll();
 
-  closeButtonElement.addEventListener('click', closeModalHandler);
+  closeButtonElement.addEventListener('click', modalCloseHandler);
   document.addEventListener('keydown', documentKeydownHandler);
 };
